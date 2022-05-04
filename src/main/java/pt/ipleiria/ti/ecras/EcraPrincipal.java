@@ -5,6 +5,9 @@ import java.io.IOException;
 
 public class EcraPrincipal extends JFrame {
     private JPanel rootPanel;
+    private JTextField inputPesquisa;
+    private JPanel panelPesquisa;
+    private JPanel panelLista;
 
     public EcraPrincipal(String windowTitle) {
         super(windowTitle);
@@ -56,7 +59,6 @@ public class EcraPrincipal extends JFrame {
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
-
         });
 
         setLocationRelativeTo(null);

@@ -12,6 +12,8 @@ public class JanelaSobre extends JFrame {
         setContentPane(rootPanel);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(400, 200);
+
+        setAlwaysOnTop(true);
         setResizable(false);
         pack();
 
