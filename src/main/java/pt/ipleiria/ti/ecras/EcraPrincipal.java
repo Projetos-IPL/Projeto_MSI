@@ -1,7 +1,6 @@
 package pt.ipleiria.ti.ecras;
 
 import javax.swing.*;
-import java.io.IOException;
 
 public class EcraPrincipal extends JFrame {
     private JPanel rootPanel;
@@ -53,12 +52,13 @@ public class EcraPrincipal extends JFrame {
 
         // action listeners
         menuFicheiro_sobre.addActionListener(e -> {
-            try {
-                var janelaSobre = new JanelaSobre("Sobre");
-                janelaSobre.setVisible(true);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+            var janelaSobre = new JanelaSobre("Sobre");
+            janelaSobre.setVisible(true);
+        });
+
+        menuProdutos_novo.addActionListener(e -> {
+            var ecraAdicionarProduto = new EcraAdicionarProduto("Adicionar Produto");
+            ecraAdicionarProduto.setVisible(true);
         });
 
         inputPesquisa.addActionListener(e -> {
