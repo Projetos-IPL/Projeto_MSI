@@ -61,6 +61,10 @@ public class EcraPrincipal extends JFrame {
             }
         });
 
+        inputPesquisa.addActionListener(e -> {
+            System.out.println("inputPesquisa = " + inputPesquisa.getText());
+        });
+
         setLocationRelativeTo(null);
     }
 
