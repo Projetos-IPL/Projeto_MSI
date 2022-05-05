@@ -1,21 +1,16 @@
 package pt.ipleiria.ti.ecras;
 
+import pt.ipleiria.ti.classes.BaseScreen;
+
 import javax.swing.*;
 
-public class JanelaSobre extends JFrame {
+public class JanelaSobre extends BaseScreen {
     private JPanel rootPanel;
 
     public JanelaSobre(String windowTitle) {
         super(windowTitle);
 
-        setContentPane(rootPanel);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setSize(400, 200);
-
-        setAlwaysOnTop(true);
-        setResizable(false);
-        pack();
-
-        setLocationRelativeTo(null);
+        super.getScreen().setSize(400, 200);
+        super.setupScreen(rootPanel);
     }
 }

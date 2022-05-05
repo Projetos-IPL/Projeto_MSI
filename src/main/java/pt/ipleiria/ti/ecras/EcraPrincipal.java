@@ -1,8 +1,10 @@
 package pt.ipleiria.ti.ecras;
 
+import pt.ipleiria.ti.classes.BaseScreen;
+
 import javax.swing.*;
 
-public class EcraPrincipal extends JFrame {
+public class EcraPrincipal extends BaseScreen {
     private JPanel rootPanel;
     private JTextField inputPesquisa;
     private JPanel panelPesquisa;
@@ -11,11 +13,9 @@ public class EcraPrincipal extends JFrame {
     public EcraPrincipal(String windowTitle) {
         super(windowTitle);
 
-        setContentPane(rootPanel);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(800, 600);
-        setResizable(false);
-        pack();
+        super.getScreen().setSize(800, 600);
+        super.setupScreen(rootPanel);
+        super.getScreen().setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         // widgets
         JMenuBar painelMenu = new JMenuBar();
@@ -61,6 +61,11 @@ public class EcraPrincipal extends JFrame {
             ecraAdicionarProduto.setVisible(true);
         });
 
+        menuStock_entrada.addActionListener(e -> {
+            var ecraEntradaStock = new EcraEntradaStock("Entrada de Stock");
+            ecraEntradaStock.setVisible(true);
+        });
+
         inputPesquisa.addActionListener(e -> {
             System.out.println("inputPesquisa = " + inputPesquisa.getText());
         });
@@ -71,7 +76,6 @@ public class EcraPrincipal extends JFrame {
     public static void main(String[] args) throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 
-        new EcraPrincipal("Ecrã Principal")
-                .setVisible(true);
+        new EcraPrincipal("Ecrã Principal").setVisible(true);
     }
 }
