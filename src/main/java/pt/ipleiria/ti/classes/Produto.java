@@ -1,0 +1,51 @@
+package pt.ipleiria.ti.classes;
+
+import java.util.UUID;
+
+public class Produto {
+
+    private final String id;
+    private String descricao;
+    private String unidade;
+    private Categoria categoria;
+
+    public Produto(String descricao, String unidade, Categoria categoria) {
+        this.id = UUID.randomUUID().toString();
+        this.descricao = descricao;
+        this.unidade = unidade;
+        this.categoria = categoria;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getUnidade() {
+        return unidade;
+    }
+
+    public void setUnidade(String unidade) {
+        this.unidade = unidade;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    @Override
+    public String toString() {
+        return this.descricao + " : " + this.unidade + " | " + this.categoria.getNome();
+    }
+}

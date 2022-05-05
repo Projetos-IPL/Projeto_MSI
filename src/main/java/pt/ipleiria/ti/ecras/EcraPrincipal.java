@@ -1,6 +1,8 @@
 package pt.ipleiria.ti.ecras;
 
 import pt.ipleiria.ti.classes.BaseScreen;
+import pt.ipleiria.ti.classes.Categoria;
+import pt.ipleiria.ti.classes.Produto;
 
 import javax.swing.*;
 
@@ -9,6 +11,7 @@ public class EcraPrincipal extends BaseScreen {
     private JTextField inputPesquisa;
     private JPanel panelPesquisa;
     private JPanel panelLista;
+    private JList<String> listaProdutos;
 
     public EcraPrincipal(String windowTitle) {
         super(windowTitle);
@@ -69,6 +72,23 @@ public class EcraPrincipal extends BaseScreen {
         inputPesquisa.addActionListener(e -> {
             System.out.println("inputPesquisa = " + inputPesquisa.getText());
         });
+
+        // populate list
+
+        Produto[] LISTA_PRODUTOS = {
+                new Produto("Produto 1", "Uni", new Categoria("Tecnologia")),
+                new Produto("Produto 2", "Litro", new Categoria("Automóvel")),
+                new Produto("Produto 3", "KG", new Categoria("Alimentação")),
+        };
+
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+
+        for (Produto produto : LISTA_PRODUTOS) {
+            listModel.addElement(produto.toString());
+        }
+
+        listaProdutos.setModel(listModel);
+        listaProdutos.setFixedCellHeight(30);
 
         setLocationRelativeTo(null);
     }

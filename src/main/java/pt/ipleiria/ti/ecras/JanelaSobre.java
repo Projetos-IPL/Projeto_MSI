@@ -12,5 +12,6 @@ public class JanelaSobre extends BaseScreen {
 
         super.getScreen().setSize(400, 200);
         super.setupScreen(rootPanel);
+        super.getScreen().setAlwaysOnTop(true);
     }
 }
