@@ -15,11 +15,12 @@ public class EcraAdicionarProduto extends BaseScreen {
     private JLabel DescriçãoProduto;
     private JLabel CategoriaProduto;
     private JLabel PreçoProduto;
+    private JButton adicionarProdutoButton;
 
     public EcraAdicionarProduto(String windowTitle) {
         super(windowTitle);
 
-        super.getScreen().setSize(800, 600);
+        super.getScreen().setSize(600, 400);
         super.setupScreen(rootPanel);
     }
 
