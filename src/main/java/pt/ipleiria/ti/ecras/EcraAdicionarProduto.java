@@ -1,5 +1,8 @@
 package pt.ipleiria.ti.ecras;
 
+import pt.ipleiria.ti.datamodel.enums.Categoria;
+import pt.ipleiria.ti.datamodel.enums.Unidade;
+
 import javax.swing.*;
 
 public class EcraAdicionarProduto extends BaseScreen {
@@ -7,8 +10,8 @@ public class EcraAdicionarProduto extends BaseScreen {
     private JTextField textField1;
     private JTextField textField2;
     private JTextField textField4;
-    private JComboBox comboBox1;
-    private JComboBox comboBox2;
+    private JComboBox<String> inputCategoria;
+    private JComboBox<String> inputUnidade;
     private JLabel NomeProduto;
     private JLabel DescriçãoProduto;
     private JLabel CategoriaProduto;
@@ -20,9 +23,14 @@ public class EcraAdicionarProduto extends BaseScreen {
 
         super.getScreen().setSize(600, 400);
         super.setupScreen(rootPanel);
-    }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
+        // populate lists
+        for (Categoria categoria : super.dataProvider.getCategorias()) {
+            inputCategoria.addItem(categoria.descricao);
+        }
+
+        for (Unidade unidade : super.dataProvider.getUnidades()) {
+            inputUnidade.addItem(unidade.descricao);
+        }
     }
 }

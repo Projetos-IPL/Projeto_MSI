@@ -67,6 +67,11 @@ public class EcraPrincipal extends BaseScreen {
             ecraEntradaStock.setVisible(true);
         });
 
+        menuStock_saida.addActionListener(e -> {
+            var ecraSaidaStock = new EcraSaidaStock("Saída de Stock");
+            ecraSaidaStock.setVisible(true);
+        });
+
         inputPesquisa.addActionListener(e -> {
             System.out.println("inputPesquisa = " + inputPesquisa.getText());
         });

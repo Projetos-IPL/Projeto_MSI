@@ -1,10 +1,8 @@
-package pt.ipleiria.ti.datamodel;
+package pt.ipleiria.ti.datamodel.enums;
 
 public enum Unidade {
 
     KG("Quilograma"),
-    LT("Litro"),
-    G("Grama"),
     UNI("Unitário");
 
     public final String descricao;
