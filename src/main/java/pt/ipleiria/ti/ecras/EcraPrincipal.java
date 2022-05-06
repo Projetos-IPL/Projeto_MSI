@@ -3,13 +3,15 @@ package pt.ipleiria.ti.ecras;
 import pt.ipleiria.ti.datamodel.Produto;
 
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class EcraPrincipal extends BaseScreen {
     private JPanel rootPanel;
     private JTextField inputPesquisa;
     private JPanel panelPesquisa;
     private JPanel panelLista;
-    private JList<String> listaProdutos;
+    private JList<Produto> listaProdutos;
 
     public EcraPrincipal(String windowTitle) {
         super(windowTitle);
@@ -17,6 +19,9 @@ public class EcraPrincipal extends BaseScreen {
         super.getScreen().setSize(800, 600);
         super.setupScreen(rootPanel);
         super.getScreen().setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        // init
+        DefaultListModel<Produto> listaProdutosModel = new DefaultListModel<>();
 
         // widgets
         JMenuBar painelMenu = new JMenuBar();
@@ -72,25 +77,39 @@ public class EcraPrincipal extends BaseScreen {
             ecraSaidaStock.setVisible(true);
         });
 
-        menuStock_quebra.addActionListener(e ->{
+        menuStock_quebra.addActionListener(e -> {
             var ecraQuebraStock = new EcraQuebraStock("Quebra de Stock");
             ecraQuebraStock.setVisible(true);
-
         });
 
         inputPesquisa.addActionListener(e -> {
             System.out.println("inputPesquisa = " + inputPesquisa.getText());
         });
 
-        // populate list
-        DefaultListModel<String> listModel = new DefaultListModel<>();
-
+        // populate model
         for (Produto produto : super.dataProvider.getProdutos()) {
-            listModel.addElement(produto.toString());
+            listaProdutosModel.addElement(produto);
         }
 
-        listaProdutos.setModel(listModel);
+        listaProdutos.setModel(listaProdutosModel);
         listaProdutos.setFixedCellHeight(30);
+
+        // click on items
+        listaProdutos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JList list = (JList) e.getSource();
+
+                if (e.getClickCount() == 2) {
+                    int selectedIndex = listaProdutos.getSelectedIndex();
+
+                    if (selectedIndex >= 0) {
+                        Produto produto = dataProvider.getProdutos().get(selectedIndex);
+                        System.out.println(produto.getId() + " - " + produto);
+                    }
+                }
+            }
+        });
 
         setLocationRelativeTo(null);
     }

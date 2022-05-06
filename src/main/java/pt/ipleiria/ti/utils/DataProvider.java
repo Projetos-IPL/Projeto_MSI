@@ -9,9 +9,9 @@ import java.util.LinkedList;
 
 public class DataProvider {
 
-    LinkedList<Categoria> categorias;
-    LinkedList<Unidade> unidades;
-    LinkedList<Produto> produtos;
+    private final LinkedList<Categoria> categorias;
+    private final LinkedList<Unidade> unidades;
+    private final LinkedList<Produto> produtos;
 
     public DataProvider() {
         this.categorias = new LinkedList<>();
