@@ -1,0 +1,40 @@
+package pt.ipleiria.ti.utils;
+
+import pt.ipleiria.ti.datamodel.Categoria;
+import pt.ipleiria.ti.datamodel.Produto;
+import pt.ipleiria.ti.datamodel.Unidade;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+
+public class DataProvider {
+
+    LinkedList<Categoria> categorias;
+    LinkedList<Unidade> unidades;
+    LinkedList<Produto> produtos;
+
+    public DataProvider() {
+        this.categorias = new LinkedList<>();
+        this.unidades = new LinkedList<>();
+        this.produtos = new LinkedList<>();
+
+        this.categorias.addAll(Arrays.asList(Categoria.values()));
+        this.unidades.addAll(Arrays.asList(Unidade.values()));
+
+        for (Categoria c : this.categorias) {
+            this.produtos.add(new Produto("Produto", Unidade.UNI, c));
+        }
+    }
+
+    public LinkedList<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public LinkedList<Unidade> getUnidades() {
+        return unidades;
+    }
+
+    public LinkedList<Produto> getProdutos() {
+        return produtos;
+    }
+}

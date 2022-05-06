@@ -1,7 +1,5 @@
 package pt.ipleiria.ti.ecras;
 
-import pt.ipleiria.ti.classes.BaseScreen;
-
 import javax.swing.*;
 
 public class JanelaSobre extends BaseScreen {

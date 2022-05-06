@@ -1,4 +1,4 @@
-package pt.ipleiria.ti.classes;
+package pt.ipleiria.ti.datamodel;
 
 import pt.ipleiria.ti.exceptions.ValorInvalidoException;
 

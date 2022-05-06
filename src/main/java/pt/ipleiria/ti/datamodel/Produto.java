@@ -1,4 +1,4 @@
-package pt.ipleiria.ti.classes;
+package pt.ipleiria.ti.datamodel;
 
 import java.util.UUID;
 
@@ -6,10 +6,10 @@ public class Produto {
 
     private final String id;
     private String descricao;
-    private String unidade;
+    private Unidade unidade;
     private Categoria categoria;
 
-    public Produto(String descricao, String unidade, Categoria categoria) {
+    public Produto(String descricao, Unidade unidade, Categoria categoria) {
         this.id = UUID.randomUUID().toString();
         this.descricao = descricao;
         this.unidade = unidade;
@@ -28,11 +28,11 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public String getUnidade() {
+    public Unidade getUnidade() {
         return unidade;
     }
 
-    public void setUnidade(String unidade) {
+    public void setUnidade(Unidade unidade) {
         this.unidade = unidade;
     }
 
@@ -46,6 +46,6 @@ public class Produto {
 
     @Override
     public String toString() {
-        return this.descricao + " : " + this.unidade + " | " + this.categoria.getNome();
+        return this.descricao + " : " + this.unidade + " | " + this.categoria.descricao;
     }
 }

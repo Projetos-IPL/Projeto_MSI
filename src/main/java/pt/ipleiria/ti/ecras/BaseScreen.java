@@ -1,11 +1,16 @@
-package pt.ipleiria.ti.classes;
+package pt.ipleiria.ti.ecras;
+
+import pt.ipleiria.ti.utils.DataProvider;
 
 import javax.swing.*;
 
 public abstract class BaseScreen extends JFrame {
 
+    protected DataProvider dataProvider;
+
     public BaseScreen(String windowTitle) {
         super(windowTitle);
+        dataProvider = new DataProvider();
     }
 
     public void setupScreen(JPanel rootPanel) {

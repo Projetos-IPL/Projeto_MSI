@@ -1,8 +1,6 @@
 package pt.ipleiria.ti.ecras;
 
-import pt.ipleiria.ti.classes.BaseScreen;
-import pt.ipleiria.ti.classes.Categoria;
-import pt.ipleiria.ti.classes.Produto;
+import pt.ipleiria.ti.datamodel.Produto;
 
 import javax.swing.*;
 
@@ -74,16 +72,9 @@ public class EcraPrincipal extends BaseScreen {
         });
 
         // populate list
-
-        Produto[] LISTA_PRODUTOS = {
-                new Produto("Produto 1", "Uni", new Categoria("Tecnologia")),
-                new Produto("Produto 2", "Litro", new Categoria("Automóvel")),
-                new Produto("Produto 3", "KG", new Categoria("Alimentação")),
-        };
-
         DefaultListModel<String> listModel = new DefaultListModel<>();
 
-        for (Produto produto : LISTA_PRODUTOS) {
+        for (Produto produto : super.dataProvider.getProdutos()) {
             listModel.addElement(produto.toString());
         }
 
