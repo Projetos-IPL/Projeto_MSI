@@ -10,8 +10,8 @@ public class EcraAdicionarProduto extends BaseScreen {
     private JTextField textField1;
     private JTextField textField2;
     private JTextField textField4;
-    private JComboBox<String> inputCategoria;
-    private JComboBox<String> inputUnidade;
+    private JComboBox<Categoria> inputCategoria;
+    private JComboBox<Unidade> inputUnidade;
     private JLabel NomeProduto;
     private JLabel DescriçãoProduto;
     private JLabel CategoriaProduto;
@@ -27,11 +27,11 @@ public class EcraAdicionarProduto extends BaseScreen {
 
         // populate lists
         for (Categoria categoria : super.dataProvider.getCategorias()) {
-            inputCategoria.addItem(categoria.descricao);
+            inputCategoria.addItem(categoria);
         }
 
         for (Unidade unidade : super.dataProvider.getUnidades()) {
-            inputUnidade.addItem(unidade.descricao);
+            inputUnidade.addItem(unidade);
         }
     }
 }

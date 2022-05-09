@@ -68,7 +68,8 @@ public class EcraPrincipal extends BaseScreen {
         });
 
         menuProdutos_editar.addActionListener(e -> {
-            // @todo ecrã de editar produto
+            var ecraEditarProduto = new EcraEditarProduto("Editar Produto");
+            ecraEditarProduto.setVisible(true);
         });
 
         menuProdutos_remover.addActionListener(e -> JOptionPane.showMessageDialog(null, "Por implementar."));
@@ -87,6 +88,8 @@ public class EcraPrincipal extends BaseScreen {
             var ecraQuebraStock = new EcraQuebraStock("Quebra de Stock");
             ecraQuebraStock.setVisible(true);
         });
+
+
 
         // search bar
 
