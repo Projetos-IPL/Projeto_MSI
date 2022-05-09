@@ -10,4 +10,9 @@ public enum Unidade {
     Unidade(String descricao) {
         this.descricao = descricao;
     }
+
+    @Override
+    public String toString() {
+        return this.descricao;
+    }
 }
