@@ -1,5 +1,8 @@
 package pt.ipleiria.ti.datamodel;
 
+import pt.ipleiria.ti.datamodel.enums.Categoria;
+import pt.ipleiria.ti.datamodel.enums.Unidade;
+
 import java.util.UUID;
 
 public class Produto {

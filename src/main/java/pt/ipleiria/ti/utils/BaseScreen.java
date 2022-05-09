@@ -1,4 +1,4 @@
-package pt.ipleiria.ti.ecras;
+package pt.ipleiria.ti.utils;
 
 import pt.ipleiria.ti.utils.DataProvider;
 

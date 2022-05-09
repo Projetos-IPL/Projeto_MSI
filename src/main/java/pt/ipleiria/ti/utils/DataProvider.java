@@ -1,8 +1,11 @@
 package pt.ipleiria.ti.utils;
 
-import pt.ipleiria.ti.datamodel.Categoria;
+import pt.ipleiria.ti.datamodel.enums.Categoria;
 import pt.ipleiria.ti.datamodel.Produto;
-import pt.ipleiria.ti.datamodel.Unidade;
+import pt.ipleiria.ti.datamodel.enums.Unidade;
+import pt.ipleiria.ti.datamodel.stock.StockEntrada;
+import pt.ipleiria.ti.datamodel.stock.StockQuebra;
+import pt.ipleiria.ti.datamodel.stock.StockSaida;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -12,6 +15,9 @@ public class DataProvider {
     private final LinkedList<Categoria> categorias;
     private final LinkedList<Unidade> unidades;
     private final LinkedList<Produto> produtos;
+    private LinkedList<StockEntrada> stockEntrada;
+    private LinkedList<StockSaida> stockSaida;
+    private LinkedList<StockQuebra> stockQuebra;
 
     public DataProvider() {
         this.categorias = new LinkedList<>();
@@ -36,5 +42,17 @@ public class DataProvider {
 
     public LinkedList<Produto> getProdutos() {
         return produtos;
+    }
+
+    public LinkedList<StockEntrada> getStockEntrada() {
+        return stockEntrada;
+    }
+
+    public LinkedList<StockSaida> getStockSaida() {
+        return stockSaida;
+    }
+
+    public LinkedList<StockQuebra> getStockQuebra() {
+        return stockQuebra;
     }
 }

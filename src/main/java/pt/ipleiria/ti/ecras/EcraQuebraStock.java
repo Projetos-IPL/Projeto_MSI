@@ -1,6 +1,7 @@
 package pt.ipleiria.ti.ecras;
 
 import pt.ipleiria.ti.datamodel.Produto;
+import pt.ipleiria.ti.utils.BaseScreen;
 
 import javax.swing.*;
 

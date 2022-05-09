@@ -1,7 +1,8 @@
 package pt.ipleiria.ti.ecras;
 
-import pt.ipleiria.ti.datamodel.Categoria;
-import pt.ipleiria.ti.datamodel.Unidade;
+import pt.ipleiria.ti.datamodel.enums.Categoria;
+import pt.ipleiria.ti.datamodel.enums.Unidade;
+import pt.ipleiria.ti.utils.BaseScreen;
 
 import javax.swing.*;
 
