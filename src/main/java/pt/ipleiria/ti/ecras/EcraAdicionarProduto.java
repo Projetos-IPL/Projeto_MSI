@@ -17,6 +17,7 @@ public class EcraAdicionarProduto extends BaseScreen {
     private JLabel CategoriaProduto;
     private JLabel PreçoProduto;
     private JButton adicionarProdutoButton;
+    private JButton cancelarButton;
 
     public EcraAdicionarProduto(String windowTitle) {
         super(windowTitle);
