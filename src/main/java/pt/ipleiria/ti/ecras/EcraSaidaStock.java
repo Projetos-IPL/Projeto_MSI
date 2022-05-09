@@ -13,4 +13,5 @@ public class EcraSaidaStock {
     private JLabel LoteProduto;
     private JComboBox comboBox2;
     private JLabel QuantidadeProduto;
+    private JButton adicionarButton;
 }
