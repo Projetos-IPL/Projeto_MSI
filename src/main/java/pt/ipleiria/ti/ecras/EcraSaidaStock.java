@@ -15,6 +15,8 @@ public class EcraSaidaStock extends BaseScreen {
     private JLabel LoteProduto;
     private JLabel QuantidadeProduto;
     private JLabel labelUnidade;
+    private JButton adicionarButton;
+    private JButton cancelarButton;
 
     public EcraSaidaStock(String windowTitle) {
         super(windowTitle);
