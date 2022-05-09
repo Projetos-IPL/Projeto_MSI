@@ -6,11 +6,11 @@ import javax.swing.*;
 
 public abstract class BaseScreen extends JFrame {
 
-    protected DataProvider dataProvider;
+    protected final DataProvider dataProvider;
 
     public BaseScreen(String windowTitle) {
         super(windowTitle);
-        dataProvider = new DataProvider();
+        this.dataProvider = new DataProvider();
     }
 
     public void setupScreen(JPanel rootPanel) {

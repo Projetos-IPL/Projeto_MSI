@@ -3,13 +3,15 @@ package pt.ipleiria.ti.ecras;
 import pt.ipleiria.ti.datamodel.Produto;
 
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class EcraPrincipal extends BaseScreen {
     private JPanel rootPanel;
     private JTextField inputPesquisa;
     private JPanel panelPesquisa;
     private JPanel panelLista;
-    private JList<String> listaProdutos;
+    private JList<Produto> listaProdutos;
 
     public EcraPrincipal(String windowTitle) {
         super(windowTitle);
@@ -17,6 +19,9 @@ public class EcraPrincipal extends BaseScreen {
         super.getScreen().setSize(800, 600);
         super.setupScreen(rootPanel);
         super.getScreen().setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        // init
+        DefaultListModel<Produto> listaProdutosModel = new DefaultListModel<>();
 
         // widgets
         JMenuBar painelMenu = new JMenuBar();
@@ -62,29 +67,59 @@ public class EcraPrincipal extends BaseScreen {
             ecraAdicionarProduto.setVisible(true);
         });
 
+        menuProdutos_editar.addActionListener(e -> {
+            // @todo ecrã de editar produto
+        });
+
+        menuProdutos_remover.addActionListener(e -> JOptionPane.showMessageDialog(null, "Por implementar."));
+
         menuStock_entrada.addActionListener(e -> {
             var ecraEntradaStock = new EcraEntradaStock("Entrada de Stock");
             ecraEntradaStock.setVisible(true);
         });
 
-        inputPesquisa.addActionListener(e -> {
-            System.out.println("inputPesquisa = " + inputPesquisa.getText());
+        menuStock_saida.addActionListener(e -> {
+            var ecraSaidaStock = new EcraSaidaStock("Saída de Stock");
+            ecraSaidaStock.setVisible(true);
         });
 
-        // populate list
-        DefaultListModel<String> listModel = new DefaultListModel<>();
+        menuStock_quebra.addActionListener(e -> {
+            var ecraQuebraStock = new EcraQuebraStock("Quebra de Stock");
+            ecraQuebraStock.setVisible(true);
+        });
 
+        // search bar
+
+        inputPesquisa.addActionListener(e -> System.out.println("inputPesquisa = " + inputPesquisa.getText()));
+
+        // populate model
         for (Produto produto : super.dataProvider.getProdutos()) {
-            listModel.addElement(produto.toString());
+            listaProdutosModel.addElement(produto);
         }
 
-        listaProdutos.setModel(listModel);
+        listaProdutos.setModel(listaProdutosModel);
         listaProdutos.setFixedCellHeight(30);
+
+        // click on items
+        listaProdutos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int selectedIndex = listaProdutos.getSelectedIndex();
+
+                    if (selectedIndex >= 0) {
+                        Produto produto = dataProvider.getProdutos().get(selectedIndex);
+                        System.out.println(produto.getId() + " - " + produto);
+                    }
+                }
+            }
+        });
 
         setLocationRelativeTo(null);
     }
 
     public static void main(String[] args) throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        // setup Windows look and feel
         UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 
         new EcraPrincipal("Ecrã Principal").setVisible(true);

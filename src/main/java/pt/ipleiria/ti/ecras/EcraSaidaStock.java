@@ -1,17 +1,30 @@
 package pt.ipleiria.ti.ecras;
 
+import pt.ipleiria.ti.datamodel.Produto;
+
 import javax.swing.*;
 
-public class EcraSaidaStock {
-    private JPanel panel1;
+public class EcraSaidaStock extends BaseScreen {
+    private JPanel rootPanel;
     private JTextField textField1;
-    private JComboBox comboBox1;
+    private JComboBox<Produto> inputProduto;
     private JTextField textField2;
     private JTextField textField3;
     private JLabel NomeProduto;
     private JLabel DataProduto;
     private JLabel LoteProduto;
-    private JComboBox comboBox2;
     private JLabel QuantidadeProduto;
-    private JButton adicionarButton;
+    private JLabel labelUnidade;
+
+    public EcraSaidaStock(String windowTitle) {
+        super(windowTitle);
+
+        super.getScreen().setSize(600, 400);
+        super.setupScreen(rootPanel);
+
+        // populate list
+        for (Produto produto : super.dataProvider.getProdutos()) {
+            inputProduto.addItem(produto);
+        }
+    }
 }

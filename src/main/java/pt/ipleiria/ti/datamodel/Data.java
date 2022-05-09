@@ -11,7 +11,6 @@ public class Data implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
-
     private final int dia;
     private final int mes;
     private final int ano;
