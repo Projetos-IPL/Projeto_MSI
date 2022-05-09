@@ -1,5 +1,7 @@
 package pt.ipleiria.ti.ecras;
 
+import pt.ipleiria.ti.datamodel.Produto;
+
 import javax.swing.*;
 
 public class EcraQuebraStock extends BaseScreen {
@@ -8,7 +10,7 @@ public class EcraQuebraStock extends BaseScreen {
     private JTextField textField1;
     private JTextField textField2;
     private JTextField textField3;
-    private JComboBox comboBox1;
+    private JComboBox<Produto> comboBox1;
     private JButton cancelarButton;
     private JButton registarButton;
 
@@ -24,8 +26,6 @@ public class EcraQuebraStock extends BaseScreen {
             dispose();
         });
 
-        registarButton.addActionListener(e -> {
-            JOptionPane.showMessageDialog(null, "Por implementar.");
-        });
+        registarButton.addActionListener(e -> JOptionPane.showMessageDialog(null, "Por implementar."));
     }
 }

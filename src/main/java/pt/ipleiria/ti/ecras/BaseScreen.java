@@ -10,7 +10,7 @@ public abstract class BaseScreen extends JFrame {
 
     public BaseScreen(String windowTitle) {
         super(windowTitle);
-        dataProvider = new DataProvider();
+        this.dataProvider = new DataProvider();
     }
 
     public void setupScreen(JPanel rootPanel) {

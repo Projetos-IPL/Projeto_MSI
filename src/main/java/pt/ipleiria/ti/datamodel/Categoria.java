@@ -1,4 +1,4 @@
-package pt.ipleiria.ti.datamodel.enums;
+package pt.ipleiria.ti.datamodel;
 
 public enum Categoria {
 

@@ -67,6 +67,12 @@ public class EcraPrincipal extends BaseScreen {
             ecraAdicionarProduto.setVisible(true);
         });
 
+        menuProdutos_editar.addActionListener(e -> {
+            // @todo ecrã de editar produto
+        });
+
+        menuProdutos_remover.addActionListener(e -> JOptionPane.showMessageDialog(null, "Por implementar."));
+
         menuStock_entrada.addActionListener(e -> {
             var ecraEntradaStock = new EcraEntradaStock("Entrada de Stock");
             ecraEntradaStock.setVisible(true);
@@ -82,9 +88,9 @@ public class EcraPrincipal extends BaseScreen {
             ecraQuebraStock.setVisible(true);
         });
 
-        inputPesquisa.addActionListener(e -> {
-            System.out.println("inputPesquisa = " + inputPesquisa.getText());
-        });
+        // search bar
+
+        inputPesquisa.addActionListener(e -> System.out.println("inputPesquisa = " + inputPesquisa.getText()));
 
         // populate model
         for (Produto produto : super.dataProvider.getProdutos()) {
@@ -98,8 +104,6 @@ public class EcraPrincipal extends BaseScreen {
         listaProdutos.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JList list = (JList) e.getSource();
-
                 if (e.getClickCount() == 2) {
                     int selectedIndex = listaProdutos.getSelectedIndex();
 
@@ -115,6 +119,7 @@ public class EcraPrincipal extends BaseScreen {
     }
 
     public static void main(String[] args) throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        // setup Windows look and feel
         UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 
         new EcraPrincipal("Ecrã Principal").setVisible(true);

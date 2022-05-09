@@ -8,7 +8,6 @@ import java.util.Objects;
 public class EcraEntradaStock extends BaseScreen {
     private JPanel rootPanel;
     private JComboBox<Produto> inputProduto;
-    private JTextField inputDataEntrada;
     private JTextField inputLote;
     private JTextField inputQuantidade;
     private JTextField inputDataValidade;
@@ -21,6 +20,7 @@ public class EcraEntradaStock extends BaseScreen {
     private JButton adicionarButton;
     private JButton cancelarButton;
     private JPanel panelInputs;
+    private JTextField inputDataEntrada;
 
     public EcraEntradaStock(String windowTitle) {
         super(windowTitle);
@@ -35,7 +35,7 @@ public class EcraEntradaStock extends BaseScreen {
 
         labelUnidade.setText(((Produto) Objects.requireNonNull(inputProduto.getSelectedItem())).getUnidade().descricao);
 
-        // change units
+        // change units on product change
         inputProduto.addActionListener(e -> labelUnidade.setText(((Produto) inputProduto.getSelectedItem()).getUnidade().descricao));
 
         // actions
