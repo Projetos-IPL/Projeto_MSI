@@ -32,6 +32,7 @@ public class EcraPrincipal extends BaseScreen {
         JMenu menuStock = new JMenu("Stock");
 
         JMenuItem menuFicheiro_sobre = new JMenuItem("Sobre");
+        JMenuItem menuFicheiro_sair = new JMenuItem("Sair");
 
         JMenuItem menuProdutos_novo = new JMenuItem("Adicionar");
         JMenuItem menuProdutos_editar = new JMenuItem("Editar");
@@ -42,6 +43,7 @@ public class EcraPrincipal extends BaseScreen {
         JMenuItem menuStock_quebra = new JMenuItem("Quebra");
 
         menuFicheiro.add(menuFicheiro_sobre);
+        menuFicheiro.add(menuFicheiro_sair);
 
         menuProdutos.add(menuProdutos_novo);
         menuProdutos.add(menuProdutos_editar);
@@ -62,6 +64,8 @@ public class EcraPrincipal extends BaseScreen {
             var janelaSobre = new JanelaSobre("Sobre");
             janelaSobre.setVisible(true);
         });
+
+        menuFicheiro_sair.addActionListener(e -> System.exit(0));
 
         menuProdutos_novo.addActionListener(e -> {
             var ecraAdicionarProduto = new EcraAdicionarProduto("Adicionar Produto");
