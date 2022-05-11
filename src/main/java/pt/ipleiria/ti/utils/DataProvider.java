@@ -1,8 +1,8 @@
 package pt.ipleiria.ti.utils;
 
-import pt.ipleiria.ti.datamodel.enums.Categoria;
+import pt.ipleiria.ti.datamodel.Categoria;
 import pt.ipleiria.ti.datamodel.Produto;
-import pt.ipleiria.ti.datamodel.enums.Unidade;
+import pt.ipleiria.ti.datamodel.Unidade;
 import pt.ipleiria.ti.datamodel.stock.StockEntrada;
 import pt.ipleiria.ti.datamodel.stock.StockQuebra;
 import pt.ipleiria.ti.datamodel.stock.StockSaida;

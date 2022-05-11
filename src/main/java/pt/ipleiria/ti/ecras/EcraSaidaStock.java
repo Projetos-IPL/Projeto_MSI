@@ -7,16 +7,16 @@ import javax.swing.*;
 
 public class EcraSaidaStock extends BaseScreen {
     private JPanel rootPanel;
-    private JTextField textField1;
+    private JTextField inputData;
     private JComboBox<Produto> inputProduto;
-    private JTextField textField2;
-    private JTextField textField3;
+    private JTextField inputLote;
+    private JTextField inputQuantidade;
     private JLabel NomeProduto;
     private JLabel DataProduto;
     private JLabel LoteProduto;
     private JLabel QuantidadeProduto;
     private JLabel labelUnidade;
-    private JButton adicionarButton;
+    private JButton removerButton;
     private JButton cancelarButton;
 
     public EcraSaidaStock(String windowTitle) {

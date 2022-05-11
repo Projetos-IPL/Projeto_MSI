@@ -1,22 +1,21 @@
 package pt.ipleiria.ti.ecras;
-
-import pt.ipleiria.ti.datamodel.enums.Categoria;
-import pt.ipleiria.ti.datamodel.enums.Unidade;
+import pt.ipleiria.ti.datamodel.Categoria;
+import pt.ipleiria.ti.datamodel.Unidade;
 import pt.ipleiria.ti.utils.BaseScreen;
 
 import javax.swing.*;
 
 public class EcraAdicionarProduto extends BaseScreen {
     private JPanel rootPanel;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField4;
+    private JTextField inputNome;
+    private JTextField inputDescricao;
+    private JTextField inputPreco;
     private JComboBox<Categoria> inputCategoria;
     private JComboBox<Unidade> inputUnidade;
     private JLabel NomeProduto;
-    private JLabel DescriçãoProduto;
+    private JLabel DescricaoProduto;
     private JLabel CategoriaProduto;
-    private JLabel PreçoProduto;
+    private JLabel precoProduto;
     private JButton adicionarProdutoButton;
     private JButton cancelarButton;
 
