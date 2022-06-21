@@ -12,6 +12,7 @@ import java.util.LinkedList;
 
 public class DataProvider {
 
+    public static final DataProvider instance = new DataProvider();
     private final LinkedList<Categoria> categorias;
     private final LinkedList<Unidade> unidades;
     private final LinkedList<Produto> produtos;
@@ -28,31 +29,39 @@ public class DataProvider {
         this.unidades.addAll(Arrays.asList(Unidade.values()));
 
         for (Categoria c : this.categorias) {
-            this.produtos.add(new Produto("Produto", Unidade.UNI, c));
+            this.produtos.add(new Produto("Produto", "Produto", Unidade.UNI, c));
         }
     }
 
+    public static DataProvider getInstance() {
+        return instance;
+    }
+
     public LinkedList<Categoria> getCategorias() {
-        return categorias;
+        return this.categorias;
     }
 
     public LinkedList<Unidade> getUnidades() {
-        return unidades;
+        return this.unidades;
     }
 
     public LinkedList<Produto> getProdutos() {
-        return produtos;
+        return this.produtos;
     }
 
     public LinkedList<StockEntrada> getStockEntrada() {
-        return stockEntrada;
+        return this.stockEntrada;
     }
 
     public LinkedList<StockSaida> getStockSaida() {
-        return stockSaida;
+        return this.stockSaida;
     }
 
     public LinkedList<StockQuebra> getStockQuebra() {
-        return stockQuebra;
+        return this.stockQuebra;
+    }
+
+    public void adicionarProduto(Produto produto) {
+        this.produtos.add(produto);
     }
 }

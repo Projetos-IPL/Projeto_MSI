@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class EcraPrincipal extends BaseScreen {
+    private final DefaultListModel<Produto> listaProdutosModel = new DefaultListModel<>();
     private JPanel rootPanel;
     private JTextField inputPesquisa;
     private JPanel panelPesquisa;
@@ -20,9 +21,6 @@ public class EcraPrincipal extends BaseScreen {
         super.getScreen().setSize(800, 600);
         super.setupScreen(rootPanel);
         super.getScreen().setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        // init
-        DefaultListModel<Produto> listaProdutosModel = new DefaultListModel<>();
 
         // widgets
         JMenuBar painelMenu = new JMenuBar();
@@ -70,6 +68,7 @@ public class EcraPrincipal extends BaseScreen {
         menuProdutos_novo.addActionListener(e -> {
             var ecraAdicionarProduto = new EcraAdicionarProduto("Adicionar Produto");
             ecraAdicionarProduto.setVisible(true);
+            this.dispose();
         });
 
         menuProdutos_editar.addActionListener(e -> {
@@ -94,10 +93,8 @@ public class EcraPrincipal extends BaseScreen {
             ecraQuebraStock.setVisible(true);
         });
 
-
-
         // search bar
-
+        // TODO
         inputPesquisa.addActionListener(e -> System.out.println("inputPesquisa = " + inputPesquisa.getText()));
 
         // populate model
@@ -118,6 +115,7 @@ public class EcraPrincipal extends BaseScreen {
                     if (selectedIndex >= 0) {
                         Produto produto = dataProvider.getProdutos().get(selectedIndex);
                         System.out.println(produto.getId() + " - " + produto);
+                        // TODO
                     }
                 }
             }
@@ -129,7 +127,6 @@ public class EcraPrincipal extends BaseScreen {
     public static void main(String[] args) throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         // setup Windows look and feel
         UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-
         new EcraPrincipal("Ecrã Principal").setVisible(true);
     }
 }

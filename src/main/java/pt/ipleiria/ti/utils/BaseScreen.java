@@ -1,7 +1,5 @@
 package pt.ipleiria.ti.utils;
 
-import pt.ipleiria.ti.utils.DataProvider;
-
 import javax.swing.*;
 
 public abstract class BaseScreen extends JFrame {
@@ -9,8 +7,8 @@ public abstract class BaseScreen extends JFrame {
     protected final DataProvider dataProvider;
 
     public BaseScreen(String windowTitle) {
-        super(windowTitle);
-        this.dataProvider = new DataProvider();
+        super("Gumbo | " + windowTitle);
+        this.dataProvider = DataProvider.getInstance();
     }
 
     public void setupScreen(JPanel rootPanel) {

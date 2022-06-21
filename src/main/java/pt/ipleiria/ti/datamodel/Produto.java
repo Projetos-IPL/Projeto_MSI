@@ -5,12 +5,14 @@ import java.util.UUID;
 public class Produto {
 
     private final String id;
+    private String nome;
     private String descricao;
     private Unidade unidade;
     private Categoria categoria;
 
-    public Produto(String descricao, Unidade unidade, Categoria categoria) {
+    public Produto(String nome, String descricao, Unidade unidade, Categoria categoria) {
         this.id = UUID.randomUUID().toString();
+        this.nome = nome;
         this.descricao = descricao;
         this.unidade = unidade;
         this.categoria = categoria;
@@ -18,6 +20,14 @@ public class Produto {
 
     public String getId() {
         return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getDescricao() {
@@ -46,6 +56,6 @@ public class Produto {
 
     @Override
     public String toString() {
-        return this.descricao + " : " + this.unidade + " | " + this.categoria.descricao;
+        return this.nome + " (" + this.descricao + ") : " + this.unidade + " | " + this.categoria.descricao;
     }
 }
