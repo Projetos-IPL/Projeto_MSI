@@ -29,7 +29,7 @@ public class DataProvider {
         this.unidades.addAll(Arrays.asList(Unidade.values()));
 
         for (Categoria c : this.categorias) {
-            this.produtos.add(new Produto("Produto", "Produto", Unidade.UNI, c));
+            this.produtos.add(new Produto("Produto", "Produto", Unidade.UNI, c, 123));
         }
     }
 

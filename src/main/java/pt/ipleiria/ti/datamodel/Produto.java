@@ -1,5 +1,7 @@
 package pt.ipleiria.ti.datamodel;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.UUID;
 
 public class Produto {
@@ -9,13 +11,15 @@ public class Produto {
     private String descricao;
     private Unidade unidade;
     private Categoria categoria;
+    private double valor;
 
-    public Produto(String nome, String descricao, Unidade unidade, Categoria categoria) {
+    public Produto(String nome, String descricao, Unidade unidade, Categoria categoria, double valor) {
         this.id = UUID.randomUUID().toString();
         this.nome = nome;
         this.descricao = descricao;
         this.unidade = unidade;
         this.categoria = categoria;
+        this.valor = valor;
     }
 
     public String getId() {
@@ -54,8 +58,19 @@ public class Produto {
         this.categoria = categoria;
     }
 
+    public double getValor() {
+        return valor;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
     @Override
     public String toString() {
-        return this.nome + " (" + this.descricao + ") : " + this.unidade + " | " + this.categoria.descricao;
+        NumberFormat format = new DecimalFormat("#0.00");
+
+        return this.nome + " (" + this.descricao + ") : " + this.unidade + " | " + this.categoria.descricao + " | " +
+                "Preço: " + format.format(this.valor) + " €";
     }
 }

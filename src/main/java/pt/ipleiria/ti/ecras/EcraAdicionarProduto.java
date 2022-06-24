@@ -1,9 +1,11 @@
 package pt.ipleiria.ti.ecras;
 
 import pt.ipleiria.ti.datamodel.Categoria;
+import pt.ipleiria.ti.datamodel.ErrorMessage;
 import pt.ipleiria.ti.datamodel.Produto;
 import pt.ipleiria.ti.datamodel.Unidade;
 import pt.ipleiria.ti.utils.BaseScreen;
+import pt.ipleiria.ti.utils.Error;
 import pt.ipleiria.ti.utils.Validation;
 
 import javax.swing.*;
@@ -38,21 +40,25 @@ public class EcraAdicionarProduto extends BaseScreen {
 
         adicionarProdutoButton.addActionListener(e -> {
             // validar formulário
-            if (Validation.isProdutoValido(inputNome.getText(), inputPreco.getText())) {
+            boolean produtoValido = Validation.isProdutoValido(inputNome.getText(), inputPreco.getText());
+
+            if (produtoValido) {
                 Produto produto = new Produto(
                         this.inputNome.getText(),
                         this.inputDescricao.getText(),
                         (Unidade) this.inputUnidade.getSelectedItem(),
-                        (Categoria) this.inputCategoria.getSelectedItem()
+                        (Categoria) this.inputCategoria.getSelectedItem(),
+                        Double.parseDouble(this.inputPreco.getText())
                 );
 
                 super.dataProvider.adicionarProduto(produto);
 
-                this.dispose();
-                new EcraPrincipal("Ecrã Principal").setVisible(true);
+                super.closeScreen();
+            } else {
+                Error.showErrorMessage(ErrorMessage.PRODUTO_FORMULARIO_INVALIDO);
             }
         });
 
-        cancelarButton.addActionListener(e -> this.dispose());
+        cancelarButton.addActionListener(e -> super.closeScreen());
     }
 }
