@@ -84,7 +84,10 @@ public class EcraPrincipal extends BaseScreen {
             }
         });
 
-        menuProdutos_remover.addActionListener(e -> JOptionPane.showMessageDialog(null, "Por implementar."));
+        menuProdutos_remover.addActionListener(e -> {
+            super.dataProvider.removerProduto(listaProdutos.getSelectedValue());
+            atualizarListaProdutos();
+        });
 
         menuStock_entrada.addActionListener(e -> {
             var ecraEntradaStock = new EcraEntradaStock("Entrada de Stock");
@@ -105,12 +108,7 @@ public class EcraPrincipal extends BaseScreen {
         // TODO
         inputPesquisa.addActionListener(e -> System.out.println("inputPesquisa = " + inputPesquisa.getText()));
 
-        // populate model
-        listaProdutos.removeAll();
-        listaProdutosModel.clear();
-        for (Produto produto : super.dataProvider.getProdutos()) {
-            listaProdutosModel.addElement(produto);
-        }
+        atualizarListaProdutos();
 
         listaProdutos.setModel(listaProdutosModel);
         listaProdutos.setFixedCellHeight(30);
@@ -122,5 +120,13 @@ public class EcraPrincipal extends BaseScreen {
         // setup Windows look and feel
         UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         new EcraPrincipal("Ecrã Principal").setVisible(true);
+    }
+
+    private void atualizarListaProdutos() {
+        listaProdutos.removeAll();
+        listaProdutosModel.clear();
+        for (Produto produto : super.dataProvider.getProdutos()) {
+            listaProdutosModel.addElement(produto);
+        }
     }
 }
