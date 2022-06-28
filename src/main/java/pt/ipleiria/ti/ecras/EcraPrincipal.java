@@ -85,8 +85,23 @@ public class EcraPrincipal extends BaseScreen {
         });
 
         menuProdutos_remover.addActionListener(e -> {
-            super.dataProvider.removerProduto(listaProdutos.getSelectedValue());
-            atualizarListaProdutos();
+            var selectedProduct = (Produto) listaProdutos.getSelectedValue();
+
+            if (selectedProduct == null) {
+                Error.showErrorMessage(ErrorMessage.EDICAO_PRODUTO_NULO);
+            } else {
+                var result = JOptionPane.showConfirmDialog(
+                        this,
+                        "Deseja remover o produto " + selectedProduct.getNome() + " (" + selectedProduct.getValor() + "€)?",
+                        "Remover Produto",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE);
+
+                if (result == JOptionPane.YES_OPTION) {
+                    super.dataProvider.removerProduto(selectedProduct);
+                    atualizarListaProdutos();
+                }
+            }
         });
 
         menuStock_entrada.addActionListener(e -> {
@@ -122,11 +137,20 @@ public class EcraPrincipal extends BaseScreen {
         new EcraPrincipal("Ecrã Principal").setVisible(true);
     }
 
+    /**
+     * Atualiza a lista de produtos no ecrã principal.
+     * <p>
+     * 1. Remove todos os elementos do widget lista
+     * 2. Remove todos os elementos do modelo da lista
+     * 3. Adiciona os produtos ao modelo da lista
+     */
     private void atualizarListaProdutos() {
         listaProdutos.removeAll();
         listaProdutosModel.clear();
+
         for (Produto produto : super.dataProvider.getProdutos()) {
             listaProdutosModel.addElement(produto);
         }
     }
+
 }
