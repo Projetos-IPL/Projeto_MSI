@@ -49,6 +49,15 @@ public class DataProvider {
         return this.produtos;
     }
 
+    public int getProdutoIndex(Produto produto) {
+        return this.produtos.indexOf(produto);
+    }
+
+    public void editarProduto(Produto produtoAntigo, Produto produtoNovo) {
+        this.produtos.remove(produtoAntigo);
+        this.produtos.add(produtoNovo);
+    }
+
     public LinkedList<StockEntrada> getStockEntrada() {
         return this.stockEntrada;
     }

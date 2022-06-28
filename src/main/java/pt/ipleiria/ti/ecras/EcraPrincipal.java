@@ -1,11 +1,11 @@
 package pt.ipleiria.ti.ecras;
 
+import pt.ipleiria.ti.datamodel.ErrorMessage;
 import pt.ipleiria.ti.datamodel.Produto;
 import pt.ipleiria.ti.utils.BaseScreen;
+import pt.ipleiria.ti.utils.Error;
 
 import javax.swing.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class EcraPrincipal extends BaseScreen {
     private final DefaultListModel<Produto> listaProdutosModel = new DefaultListModel<>();
@@ -72,8 +72,16 @@ public class EcraPrincipal extends BaseScreen {
         });
 
         menuProdutos_editar.addActionListener(e -> {
-            var ecraEditarProduto = new EcraEditarProduto("Editar Produto");
-            ecraEditarProduto.setVisible(true);
+            var selectedProduct = (Produto) listaProdutos.getSelectedValue();
+
+            if (selectedProduct == null) {
+                Error.showErrorMessage(ErrorMessage.EDICAO_PRODUTO_NULO);
+            } else {
+                var ecraEditarProduto = new EcraEditarProduto("Editar Produto - " + selectedProduct.getNome(),
+                        selectedProduct);
+                ecraEditarProduto.setVisible(true);
+                this.dispose();
+            }
         });
 
         menuProdutos_remover.addActionListener(e -> JOptionPane.showMessageDialog(null, "Por implementar."));
@@ -98,28 +106,14 @@ public class EcraPrincipal extends BaseScreen {
         inputPesquisa.addActionListener(e -> System.out.println("inputPesquisa = " + inputPesquisa.getText()));
 
         // populate model
+        listaProdutos.removeAll();
+        listaProdutosModel.clear();
         for (Produto produto : super.dataProvider.getProdutos()) {
             listaProdutosModel.addElement(produto);
         }
 
         listaProdutos.setModel(listaProdutosModel);
         listaProdutos.setFixedCellHeight(30);
-
-        // click on items
-        listaProdutos.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {
-                    int selectedIndex = listaProdutos.getSelectedIndex();
-
-                    if (selectedIndex >= 0) {
-                        Produto produto = dataProvider.getProdutos().get(selectedIndex);
-                        System.out.println(produto.getId() + " - " + produto);
-                        // TODO
-                    }
-                }
-            }
-        });
 
         setLocationRelativeTo(null);
     }

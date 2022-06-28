@@ -17,10 +17,28 @@ public class Validation {
      */
     public static boolean isProdutoValido(String nomeProduto, String valorProduto) {
         boolean valido = true;
+        float valor = -1;
 
-        float valor = valorProduto.isBlank() ? 0 : Float.parseFloat(valorProduto);
+        if (valorProduto.isBlank()) {
+            valido = false;
+            Error.showErrorMessage(ErrorMessage.VALOR_PRODUTO_FALTA);
+        }
 
-        if (nomeProduto.trim().isBlank()) {
+        try {
+            valor = Float.parseFloat(valorProduto);
+        } catch (NumberFormatException e) {
+            valido = false;
+            Error.showErrorMessage(ErrorMessage.NUMERO_INVALIDO);
+        }
+
+        if (valor != -1) {
+            if (valor < 0) {
+                valido = false;
+                Error.showErrorMessage(ErrorMessage.PRODUTO_VALOR_NEGATIVO);
+            }
+        }
+
+        if (valido && nomeProduto.trim().isBlank()) {
             valido = false;
             Error.showErrorMessage(ErrorMessage.PRODUTO_NOME_VAZIO);
         } else if (valido && nomeProduto.trim().length() < 3) {
