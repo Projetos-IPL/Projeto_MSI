@@ -1,6 +1,6 @@
 package pt.ipleiria.ti.utils;
 
-import pt.ipleiria.ti.ecras.EcraPrincipal;
+import pt.ipleiria.ti.ecras.geral.EcraPrincipal;
 
 import javax.swing.*;
 

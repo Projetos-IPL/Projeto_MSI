@@ -8,4 +8,10 @@ public class StockSaida extends Stock {
     public StockSaida(Produto produto, Data data, int quantidade, String lote) {
         super(produto, data, quantidade, lote);
     }
+
+    @Override
+    public String toString() {
+        return "(SAÍDA) " + super.toString();
+    }
+
 }

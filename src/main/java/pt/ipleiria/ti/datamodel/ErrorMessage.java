@@ -7,7 +7,9 @@ public enum ErrorMessage {
     PRODUTO_FORMULARIO_INVALIDO("Corrija o formulário!"),
     EDICAO_PRODUTO_NULO("Selecione um produto da lista"),
     NUMERO_INVALIDO("Número inválido!"),
-    VALOR_PRODUTO_FALTA("Insira o valor do produto");
+    VALOR_PRODUTO_FALTA("Insira o valor do produto"),
+    QUANTIDADE_STOCK_SAIDA_INVALIDA("Quantidade de stock de saída inválido!"),
+    QUANTIDADE_STOCK_QUEBRA_INVALIDA("Quantidade de stock de quebra inválido!");
 
     final String message;
 

@@ -1,6 +1,7 @@
 package pt.ipleiria.ti.utils;
 
 import pt.ipleiria.ti.datamodel.Categoria;
+import pt.ipleiria.ti.datamodel.ErrorMessage;
 import pt.ipleiria.ti.datamodel.Produto;
 import pt.ipleiria.ti.datamodel.Unidade;
 import pt.ipleiria.ti.datamodel.stock.StockEntrada;
@@ -9,6 +10,7 @@ import pt.ipleiria.ti.datamodel.stock.StockSaida;
 
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 public class DataProvider {
 
@@ -16,20 +18,26 @@ public class DataProvider {
     private final LinkedList<Categoria> categorias;
     private final LinkedList<Unidade> unidades;
     private final LinkedList<Produto> produtos;
-    private LinkedList<StockEntrada> stockEntrada;
-    private LinkedList<StockSaida> stockSaida;
-    private LinkedList<StockQuebra> stockQuebra;
+    private final LinkedList<StockEntrada> stockEntrada;
+    private final LinkedList<StockSaida> stockSaida;
+    private final LinkedList<StockQuebra> stockQuebra;
 
     public DataProvider() {
         this.categorias = new LinkedList<>();
         this.unidades = new LinkedList<>();
         this.produtos = new LinkedList<>();
 
+        this.stockEntrada = new LinkedList<>();
+        this.stockSaida = new LinkedList<>();
+        this.stockQuebra = new LinkedList<>();
+
         this.categorias.addAll(Arrays.asList(Categoria.values()));
         this.unidades.addAll(Arrays.asList(Unidade.values()));
 
         for (Categoria c : this.categorias) {
-            this.produtos.add(new Produto("Produto", "Produto", Unidade.UNI, c, 123));
+            Produto produto = new Produto("Produto", "Produto", Unidade.UNI, c, 123);
+            this.produtos.add(produto);
+            this.stockEntrada.add(new StockEntrada(produto, new Data(10, 1, 2022), 10, "abc"));
         }
     }
 
@@ -76,5 +84,35 @@ public class DataProvider {
 
     public void removerProduto(Produto produto) {
         this.produtos.remove(produto);
+    }
+
+    public List<StockEntrada> getStockEntradaForProduto(Produto produto) {
+        return stockEntrada.stream()
+                .filter(s -> s.getProduto() == produto).toList();
+    }
+
+    public void adicionarStockEntrada(StockEntrada stockEntrada) {
+        this.stockEntrada.add(stockEntrada);
+        stockEntrada.getProduto().setQuantidadeStock(stockEntrada.getQuantidade());
+    }
+
+    public void adicionarStockSaida(StockSaida stockSaida) {
+        int quantidadeStockAtual = stockSaida.getProduto().getQuantidadeStock();
+
+        if (stockSaida.getQuantidade() > quantidadeStockAtual) {
+            Error.showErrorMessage(ErrorMessage.QUANTIDADE_STOCK_SAIDA_INVALIDA);
+        } else {
+            this.stockSaida.add(stockSaida);
+        }
+    }
+
+    public void adicionarStockQuebra(StockQuebra stockQuebra) {
+        int quantidadeStockAtual = stockQuebra.getProduto().getQuantidadeStock();
+
+        if (stockQuebra.getQuantidade() > quantidadeStockAtual) {
+            Error.showErrorMessage(ErrorMessage.QUANTIDADE_STOCK_QUEBRA_INVALIDA);
+        } else {
+            this.stockQuebra.add(stockQuebra);
+        }
     }
 }

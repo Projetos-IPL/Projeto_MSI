@@ -1,4 +1,4 @@
-package pt.ipleiria.ti.ecras;
+package pt.ipleiria.ti.ecras.stock;
 
 import pt.ipleiria.ti.datamodel.Produto;
 import pt.ipleiria.ti.utils.BaseScreen;

@@ -1,4 +1,4 @@
-package pt.ipleiria.ti.ecras;
+package pt.ipleiria.ti.ecras.geral;
 
 import pt.ipleiria.ti.datamodel.Categoria;
 import pt.ipleiria.ti.datamodel.ErrorMessage;
@@ -10,18 +10,17 @@ import pt.ipleiria.ti.utils.Validation;
 
 import javax.swing.*;
 
-public class EcraEditarProduto extends BaseScreen {
-
+public class EcraAdicionarProduto extends BaseScreen {
     private JPanel rootPanel;
     private JTextField inputNome;
     private JTextField inputDescricao;
     private JTextField inputPreco;
     private JComboBox<Categoria> inputCategoria;
     private JComboBox<Unidade> inputUnidade;
-    private JButton editarProdutoButton;
+    private JButton adicionarProdutoButton;
     private JButton cancelarButton;
 
-    public EcraEditarProduto(String windowTitle, Produto produtoSelecionado) {
+    public EcraAdicionarProduto(String windowTitle) {
         super(windowTitle);
 
         super.getScreen().setSize(600, 400);
@@ -36,12 +35,15 @@ public class EcraEditarProduto extends BaseScreen {
             inputUnidade.addItem(unidade);
         }
 
-        editarProdutoButton.addActionListener(e -> {
+        // default values
+        this.inputPreco.setText("0");
+
+        adicionarProdutoButton.addActionListener(e -> {
             // validar formulário
             boolean produtoValido = Validation.isProdutoValido(inputNome.getText(), inputPreco.getText());
 
             if (produtoValido) {
-                Produto produtoNovo = new Produto(
+                Produto produto = new Produto(
                         this.inputNome.getText(),
                         this.inputDescricao.getText(),
                         (Unidade) this.inputUnidade.getSelectedItem(),
@@ -49,7 +51,7 @@ public class EcraEditarProduto extends BaseScreen {
                         Double.parseDouble(this.inputPreco.getText())
                 );
 
-                super.dataProvider.editarProduto(produtoSelecionado, produtoNovo);
+                super.dataProvider.adicionarProduto(produto);
 
                 super.closeScreen();
             } else {
@@ -58,13 +60,5 @@ public class EcraEditarProduto extends BaseScreen {
         });
 
         cancelarButton.addActionListener(e -> super.closeScreen());
-
-        this.inputNome.setText(produtoSelecionado.getNome());
-        this.inputDescricao.setText(produtoSelecionado.getDescricao());
-        this.inputCategoria.setSelectedItem(produtoSelecionado.getCategoria());
-        this.inputUnidade.setSelectedItem(produtoSelecionado.getUnidade());
-        this.inputPreco.setText(String.valueOf(produtoSelecionado.getValor()));
-
-        this.editarProdutoButton.setText("Editar Produto");
     }
 }

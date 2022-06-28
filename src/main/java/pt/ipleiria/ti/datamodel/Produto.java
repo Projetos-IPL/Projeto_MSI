@@ -12,6 +12,7 @@ public class Produto {
     private Unidade unidade;
     private Categoria categoria;
     private double valor;
+    private int quantidadeStock;
 
     public Produto(String nome, String descricao, Unidade unidade, Categoria categoria, double valor) {
         this.id = UUID.randomUUID().toString();
@@ -64,6 +65,14 @@ public class Produto {
 
     public void setValor(double valor) {
         this.valor = valor;
+    }
+
+    public int getQuantidadeStock() {
+        return quantidadeStock;
+    }
+
+    public void setQuantidadeStock(int quantidadeStock) {
+        this.quantidadeStock = quantidadeStock;
     }
 
     @Override

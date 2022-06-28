@@ -1,7 +1,11 @@
-package pt.ipleiria.ti.ecras;
+package pt.ipleiria.ti.ecras.geral;
 
 import pt.ipleiria.ti.datamodel.ErrorMessage;
 import pt.ipleiria.ti.datamodel.Produto;
+import pt.ipleiria.ti.ecras.stock.EcraEntradaStock;
+import pt.ipleiria.ti.ecras.stock.EcraListaStockEntrada;
+import pt.ipleiria.ti.ecras.stock.EcraQuebraStock;
+import pt.ipleiria.ti.ecras.stock.EcraSaidaStock;
 import pt.ipleiria.ti.utils.BaseScreen;
 import pt.ipleiria.ti.utils.Error;
 
@@ -40,6 +44,10 @@ public class EcraPrincipal extends BaseScreen {
         JMenuItem menuStock_saida = new JMenuItem("Saída");
         JMenuItem menuStock_quebra = new JMenuItem("Quebra");
 
+        JMenuItem menuStock_listaSaida = new JMenuItem("Movimentos de Saída");
+        JMenuItem menuStock_listaEntrada = new JMenuItem("Movimentos de Entrada");
+        JMenuItem menuStock_listaQuebra = new JMenuItem("Movimentos de Quebra");
+
         menuFicheiro.add(menuFicheiro_sobre);
         menuFicheiro.add(menuFicheiro_sair);
 
@@ -50,6 +58,10 @@ public class EcraPrincipal extends BaseScreen {
         menuStock.add(menuStock_entrada);
         menuStock.add(menuStock_saida);
         menuStock.add(menuStock_quebra);
+        menuStock.add(new JSeparator());
+        menuStock.add(menuStock_listaEntrada);
+        menuStock.add(menuStock_listaSaida);
+        menuStock.add(menuStock_listaQuebra);
 
         painelMenu.add(menuFicheiro);
         painelMenu.add(menuProdutos);
@@ -107,16 +119,31 @@ public class EcraPrincipal extends BaseScreen {
         menuStock_entrada.addActionListener(e -> {
             var ecraEntradaStock = new EcraEntradaStock("Entrada de Stock");
             ecraEntradaStock.setVisible(true);
+            this.dispose();
         });
 
         menuStock_saida.addActionListener(e -> {
             var ecraSaidaStock = new EcraSaidaStock("Saída de Stock");
             ecraSaidaStock.setVisible(true);
+            this.dispose();
         });
 
         menuStock_quebra.addActionListener(e -> {
             var ecraQuebraStock = new EcraQuebraStock("Quebra de Stock");
             ecraQuebraStock.setVisible(true);
+            this.dispose();
+        });
+
+        menuStock_listaEntrada.addActionListener(e -> {
+            var selectedProduct = (Produto) listaProdutos.getSelectedValue();
+
+            if (selectedProduct == null) {
+                Error.showErrorMessage(ErrorMessage.EDICAO_PRODUTO_NULO);
+            } else {
+                var ecraEntradaStockLista = new EcraListaStockEntrada("Lista de Movimentos de Entrada de Stock", selectedProduct);
+                ecraEntradaStockLista.setVisible(true);
+                this.dispose();
+            }
         });
 
         // search bar
@@ -152,5 +179,4 @@ public class EcraPrincipal extends BaseScreen {
             listaProdutosModel.addElement(produto);
         }
     }
-
 }

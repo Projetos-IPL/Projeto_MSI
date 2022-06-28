@@ -48,4 +48,10 @@ public abstract class Stock {
     public void setLote(String lote) {
         this.lote = lote;
     }
+
+    @Override
+    public String toString() {
+        return "Produto: " + produto.getNome() + " | Quant. " + quantidade + " (" + produto.getUnidade().toString() +
+                ") | Lote: " + lote + " | Data: " + data.toString();
+    }
 }

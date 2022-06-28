@@ -18,4 +18,9 @@ public class StockEntrada extends Stock {
     public void setDataValidade(Data dataValidade) {
         this.dataValidade = dataValidade;
     }
+
+    @Override
+    public String toString() {
+        return "(ENTRADA) " + super.toString();
+    }
 }
