@@ -6,6 +6,8 @@ import pt.ipleiria.ti.ecras.stock.EcraEntradaStock;
 import pt.ipleiria.ti.ecras.stock.EcraQuebraStock;
 import pt.ipleiria.ti.ecras.stock.EcraSaidaStock;
 import pt.ipleiria.ti.ecras.stock.listas.EcraListaStockEntrada;
+import pt.ipleiria.ti.ecras.stock.listas.EcraListaStockQuebra;
+import pt.ipleiria.ti.ecras.stock.listas.EcraListaStockSaida;
 import pt.ipleiria.ti.utils.BaseScreen;
 import pt.ipleiria.ti.utils.Error;
 
@@ -72,6 +74,8 @@ public class EcraPrincipal extends BaseScreen {
         painelMenu.add(menuStock);
 
         setJMenuBar(painelMenu);
+
+        listaProdutos.setLayoutOrientation(JList.VERTICAL);
 
         // action listeners
         menuFicheiro_sobre.addActionListener(e -> {
@@ -150,6 +154,32 @@ public class EcraPrincipal extends BaseScreen {
             }
         });
 
+        menuStock_listaQuebra.addActionListener(e -> {
+            var selectedProduct = (Produto) listaProdutos.getSelectedValue();
+
+            if (selectedProduct == null) {
+                Error.showErrorMessage(ErrorMessage.EDICAO_PRODUTO_NULO);
+            } else {
+                var ecraQuebraStockLista = new EcraListaStockQuebra("Lista de Movimentos de Quebra de Stock",
+                        selectedProduct);
+                ecraQuebraStockLista.setVisible(true);
+                this.dispose();
+            }
+        });
+
+        menuStock_listaSaida.addActionListener(e -> {
+            var selectedProduct = (Produto) listaProdutos.getSelectedValue();
+
+            if (selectedProduct == null) {
+                Error.showErrorMessage(ErrorMessage.EDICAO_PRODUTO_NULO);
+            } else {
+                var ecraSaidaStockLista = new EcraListaStockSaida("Lista de Movimentos de Saída de Stock",
+                        selectedProduct);
+                ecraSaidaStockLista.setVisible(true);
+                this.dispose();
+            }
+        });
+
         // search bar
         inputPesquisa.addKeyListener(new KeyAdapter() {
             @Override
@@ -186,6 +216,7 @@ public class EcraPrincipal extends BaseScreen {
     public static void main(String[] args) throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         // setup Windows look and feel
         UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+
         new EcraPrincipal("Ecrã Principal").setVisible(true);
     }
 
@@ -205,6 +236,12 @@ public class EcraPrincipal extends BaseScreen {
         }
     }
 
+    /**
+     * Atualiza a lista de produtos no ecrã principal, com uma lista de produtos
+     * personalizada.
+     *
+     * @param produtos Lista de produtos.
+     */
     private void atualizarListaProdutosPesquisa(LinkedList<Produto> produtos) {
         listaProdutos.removeAll();
         listaProdutosModel.clear();

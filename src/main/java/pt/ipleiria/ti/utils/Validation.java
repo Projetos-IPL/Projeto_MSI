@@ -1,8 +1,15 @@
 package pt.ipleiria.ti.utils;
 
+import pt.ipleiria.ti.datamodel.Data;
 import pt.ipleiria.ti.datamodel.ErrorMessage;
+import pt.ipleiria.ti.datamodel.stock.StockEntrada;
+import pt.ipleiria.ti.datamodel.stock.StockSaida;
+
+import java.time.LocalDate;
 
 public class Validation {
+
+    private static final DataProvider dataProvider = DataProvider.getInstance();
 
     /**
      * Valida o formulário de Adicionar Produto.
@@ -47,6 +54,54 @@ public class Validation {
         } else if (valido && valor < 0) {
             valido = false;
             Error.showErrorMessage(ErrorMessage.PRODUTO_VALOR_NEGATIVO);
+        }
+
+        return valido;
+    }
+
+    public static boolean isStockEntradaValido(LocalDate dataValidade, int quantidade) {
+        boolean valido = true;
+
+        if (Data.getDatesDiff(dataValidade).toDays() < 30) {
+            valido = false;
+            Error.showErrorMessage(ErrorMessage.DATA_INFERIR_30_DIAS);
+        } else if (valido && dataValidade.toEpochDay() < LocalDate.now().toEpochDay()) {
+            valido = false;
+            Error.showErrorMessage(ErrorMessage.DATA_VALIDADE_INFERIOR_HOJE);
+        } else if (valido && quantidade <= 0) {
+            valido = false;
+            Error.showErrorMessage(ErrorMessage.QUANTIDADE_STOCK_ENTRADA_INVALIDA);
+        }
+
+        return valido;
+    }
+
+    public static boolean isStockSaidaValido(StockSaida stockSaida) {
+        boolean valido = true;
+        boolean found = false;
+        int quantidadeStock = 0;
+        LocalDate dataEntradaStock = null;
+
+        for (StockEntrada s : dataProvider.getStockEntradaForProduto(stockSaida.getProduto())) {
+            if (s.getProduto() == stockSaida.getProduto() && s.getLote() == stockSaida.getLote()) {
+                found = true;
+                quantidadeStock = s.getQuantidade();
+                dataEntradaStock = s.getData();
+                break;
+            }
+        }
+
+        if (found) {
+            if (stockSaida.getQuantidade() != quantidadeStock) {
+                valido = false;
+                // todo: message
+            } else if (valido && stockSaida.getData().toEpochDay() < LocalDate.now().toEpochDay()) {
+                valido = false;
+                // todo: mensagem
+            } else if (valido && stockSaida.getData().toEpochDay() < dataEntradaStock.toEpochDay()) {
+                valido = false;
+                // todo: mensagem
+            }
         }
 
         return valido;

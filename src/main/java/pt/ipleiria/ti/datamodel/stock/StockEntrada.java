@@ -1,21 +1,22 @@
 package pt.ipleiria.ti.datamodel.stock;
 
 import pt.ipleiria.ti.datamodel.Produto;
-import pt.ipleiria.ti.utils.Data;
+
+import java.time.LocalDate;
 
 public class StockEntrada extends Stock {
 
-    private Data dataValidade;
+    private LocalDate dataValidade;
 
-    public StockEntrada(Produto produto, Data data, int quantidade, String lote) {
+    public StockEntrada(Produto produto, LocalDate data, int quantidade, String lote) {
         super(produto, data, quantidade, lote);
     }
 
-    public Data getDataValidade() {
+    public LocalDate getDataValidade() {
         return dataValidade;
     }
 
-    public void setDataValidade(Data dataValidade) {
+    public void setDataValidade(LocalDate dataValidade) {
         this.dataValidade = dataValidade;
     }
 

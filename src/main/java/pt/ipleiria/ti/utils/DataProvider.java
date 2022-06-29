@@ -8,13 +8,14 @@ import pt.ipleiria.ti.datamodel.stock.StockEntrada;
 import pt.ipleiria.ti.datamodel.stock.StockQuebra;
 import pt.ipleiria.ti.datamodel.stock.StockSaida;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 public class DataProvider {
 
-    public static final DataProvider instance = new DataProvider();
+    private static final DataProvider instance = new DataProvider();
     private final LinkedList<Categoria> categorias;
     private final LinkedList<Unidade> unidades;
     private final LinkedList<Produto> produtos;
@@ -37,7 +38,13 @@ public class DataProvider {
         for (Categoria c : this.categorias) {
             Produto produto = new Produto("Produto", "Produto", Unidade.UNI, c, 123);
             this.produtos.add(produto);
-            this.stockEntrada.add(new StockEntrada(produto, new Data(10, 1, 2022), 10, "abc"));
+            this.stockEntrada.add(new StockEntrada(produto, LocalDate.now(), 10, "abc"));
+        }
+
+        for (Categoria c : this.categorias) {
+            Produto produto = new Produto("Produto", "Produto", Unidade.UNI, c, 123);
+            this.produtos.add(produto);
+            this.stockEntrada.add(new StockEntrada(produto, LocalDate.now(), 10, "abc"));
         }
     }
 
@@ -86,22 +93,19 @@ public class DataProvider {
         this.produtos.remove(produto);
     }
 
-    public List<StockEntrada> getStockEntradaForProduto(Produto produto) {
-        return stockEntrada.stream()
-                .filter(s -> s.getProduto() == produto).toList();
-    }
-
     public void adicionarStockEntrada(StockEntrada stockEntrada) {
-        this.stockEntrada.add(stockEntrada);
-        stockEntrada.getProduto().setQuantidadeStock(stockEntrada.getQuantidade());
+        boolean valido = Validation.isStockEntradaValido(stockEntrada.getData(), stockEntrada.getQuantidade());
+
+        if (valido) {
+            this.stockEntrada.add(stockEntrada);
+            stockEntrada.getProduto().setQuantidadeStock(stockEntrada.getQuantidade());
+        }
     }
 
     public void adicionarStockSaida(StockSaida stockSaida) {
-        int quantidadeStockAtual = stockSaida.getProduto().getQuantidadeStock();
+        boolean valido = Validation.isStockSaidaValido(stockSaida);
 
-        if (stockSaida.getQuantidade() > quantidadeStockAtual) {
-            Error.showErrorMessage(ErrorMessage.QUANTIDADE_STOCK_SAIDA_INVALIDA);
-        } else {
+        if (valido) {
             this.stockSaida.add(stockSaida);
         }
     }
@@ -114,5 +118,20 @@ public class DataProvider {
         } else {
             this.stockQuebra.add(stockQuebra);
         }
+    }
+
+    public List<StockEntrada> getStockEntradaForProduto(Produto produto) {
+        return stockEntrada.stream()
+                .filter(s -> s.getProduto() == produto).toList();
+    }
+
+    public List<StockQuebra> getStockQuebraForProduto(Produto produto) {
+        return stockQuebra.stream()
+                .filter(s -> s.getProduto() == produto).toList();
+    }
+
+    public List<StockSaida> getStockSaidaForProduto(Produto produto) {
+        return stockSaida.stream()
+                .filter(s -> s.getProduto() == produto).toList();
     }
 }

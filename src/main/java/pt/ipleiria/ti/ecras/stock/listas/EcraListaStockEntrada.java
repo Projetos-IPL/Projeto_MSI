@@ -36,7 +36,7 @@ public class EcraListaStockEntrada extends BaseScreen {
         setLocationRelativeTo(null);
     }
 
-    private void atualizarListaStock() {
+    protected void atualizarListaStock() {
         listaStock.removeAll();
         listaStockModel.clear();
 

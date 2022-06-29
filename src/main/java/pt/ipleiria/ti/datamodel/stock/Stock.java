@@ -1,16 +1,17 @@
 package pt.ipleiria.ti.datamodel.stock;
 
 import pt.ipleiria.ti.datamodel.Produto;
-import pt.ipleiria.ti.utils.Data;
+
+import java.time.LocalDate;
 
 public abstract class Stock {
 
     private Produto produto;
-    private Data data;
+    private LocalDate data;
     private int quantidade;
     private String lote;
 
-    public Stock(Produto produto, Data data, int quantidade, String lote) {
+    public Stock(Produto produto, LocalDate data, int quantidade, String lote) {
         this.produto = produto;
         this.data = data;
         this.quantidade = quantidade;
@@ -25,11 +26,11 @@ public abstract class Stock {
         this.produto = produto;
     }
 
-    public Data getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Data data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
