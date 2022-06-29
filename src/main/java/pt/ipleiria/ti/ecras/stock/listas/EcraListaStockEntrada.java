@@ -1,4 +1,4 @@
-package pt.ipleiria.ti.ecras.stock;
+package pt.ipleiria.ti.ecras.stock.listas;
 
 import pt.ipleiria.ti.datamodel.Produto;
 import pt.ipleiria.ti.datamodel.stock.StockEntrada;

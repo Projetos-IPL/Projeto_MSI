@@ -3,13 +3,16 @@ package pt.ipleiria.ti.ecras.geral;
 import pt.ipleiria.ti.datamodel.ErrorMessage;
 import pt.ipleiria.ti.datamodel.Produto;
 import pt.ipleiria.ti.ecras.stock.EcraEntradaStock;
-import pt.ipleiria.ti.ecras.stock.EcraListaStockEntrada;
 import pt.ipleiria.ti.ecras.stock.EcraQuebraStock;
 import pt.ipleiria.ti.ecras.stock.EcraSaidaStock;
+import pt.ipleiria.ti.ecras.stock.listas.EcraListaStockEntrada;
 import pt.ipleiria.ti.utils.BaseScreen;
 import pt.ipleiria.ti.utils.Error;
 
 import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.LinkedList;
 
 public class EcraPrincipal extends BaseScreen {
     private final DefaultListModel<Produto> listaProdutosModel = new DefaultListModel<>();
@@ -18,6 +21,7 @@ public class EcraPrincipal extends BaseScreen {
     private JPanel panelPesquisa;
     private JPanel panelLista;
     private JList<Produto> listaProdutos;
+    private JButton btnPesquisaLimpar;
 
     public EcraPrincipal(String windowTitle) {
         super(windowTitle);
@@ -147,8 +151,29 @@ public class EcraPrincipal extends BaseScreen {
         });
 
         // search bar
-        // TODO
-        inputPesquisa.addActionListener(e -> System.out.println("inputPesquisa = " + inputPesquisa.getText()));
+        inputPesquisa.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (!inputPesquisa.getText().isBlank()) {
+                        LinkedList<Produto> produtosPesquisa = new LinkedList<>();
+
+                        for (Produto produto : dataProvider.getProdutos()) {
+                            if (produto.toString().toLowerCase().contains(inputPesquisa.getText().toLowerCase())) {
+                                produtosPesquisa.add(produto);
+                            }
+                        }
+
+                        atualizarListaProdutosPesquisa(produtosPesquisa);
+                    }
+                }
+            }
+        });
+
+        btnPesquisaLimpar.addActionListener(e -> {
+            inputPesquisa.setText("");
+            atualizarListaProdutos();
+        });
 
         atualizarListaProdutos();
 
@@ -176,6 +201,15 @@ public class EcraPrincipal extends BaseScreen {
         listaProdutosModel.clear();
 
         for (Produto produto : super.dataProvider.getProdutos()) {
+            listaProdutosModel.addElement(produto);
+        }
+    }
+
+    private void atualizarListaProdutosPesquisa(LinkedList<Produto> produtos) {
+        listaProdutos.removeAll();
+        listaProdutosModel.clear();
+
+        for (Produto produto : produtos) {
             listaProdutosModel.addElement(produto);
         }
     }
