@@ -79,6 +79,7 @@ public class Validation {
     public static boolean isStockSaidaValido(StockSaida stockSaida) {
         boolean valido = true;
         boolean found = false;
+        boolean loteFound = false;
         int quantidadeStock = 0;
         LocalDate dataEntradaStock = null;
 
@@ -91,16 +92,26 @@ public class Validation {
             }
         }
 
+        for (StockEntrada s : dataProvider.getStockEntradaForProduto(stockSaida.getProduto())) {
+            if (s.getLote() == stockSaida.getLote()) {
+                loteFound = true;
+                break;
+            }
+        }
+
         if (found) {
             if (stockSaida.getQuantidade() != quantidadeStock) {
                 valido = false;
-                // todo: message
+                Error.showErrorMessage(ErrorMessage.QUANTIDADE_STOCK_SAIDA_INVALIDA);
             } else if (valido && stockSaida.getData().toEpochDay() < LocalDate.now().toEpochDay()) {
                 valido = false;
-                // todo: mensagem
+                Error.showErrorMessage(ErrorMessage.DATA_STOCK_SAIDA_INFERIOR_ATUAL);
             } else if (valido && stockSaida.getData().toEpochDay() < dataEntradaStock.toEpochDay()) {
                 valido = false;
-                // todo: mensagem
+                Error.showErrorMessage(ErrorMessage.DATA_STOCK_SAIDA_INFERIOR_STOCK_ENTRADA);
+            } else if (valido && loteFound) {
+                valido = false;
+                Error.showErrorMessage(ErrorMessage.STOCK_SAIDA_LOTE_INVALIDO);
             }
         }
 
