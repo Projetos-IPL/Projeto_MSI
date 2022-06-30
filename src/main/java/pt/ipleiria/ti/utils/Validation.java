@@ -62,7 +62,7 @@ public class Validation {
     public static boolean isStockEntradaValido(LocalDate dataValidade, int quantidade) {
         boolean valido = true;
 
-        if (Data.getDatesDiff(dataValidade).toDays() < 30) {
+        if (Data.getDatesDiff(dataValidade).toDays() < 0) {
             valido = false;
             Error.showErrorMessage(ErrorMessage.DATA_INFERIR_30_DIAS);
         } else if (valido && dataValidade.toEpochDay() < LocalDate.now().toEpochDay()) {

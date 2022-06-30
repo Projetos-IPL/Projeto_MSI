@@ -16,7 +16,8 @@ public enum ErrorMessage {
     QUANTIDADE_STOCK_ENTRADA_INVALIDA("Quantidade de stock de entrada inválida!"),
     DATA_STOCK_SAIDA_INFERIOR_ATUAL("A data do stock de saída tem de ser superior à data atual!"),
     DATA_STOCK_SAIDA_INFERIOR_STOCK_ENTRADA("A data do stock de saída tem de ser superior à data do stock de entrada!"),
-    STOCK_SAIDA_LOTE_INVALIDO("O lote é inválido!");
+    STOCK_SAIDA_LOTE_INVALIDO("O lote é inválido!"),
+    STOCK_FORMULARIO_INVALIDO("Formulário do stock de entrada inválido!");
 
     final String message;
 

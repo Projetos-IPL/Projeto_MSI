@@ -40,12 +40,6 @@ public class DataProvider {
             this.produtos.add(produto);
             this.stockEntrada.add(new StockEntrada(produto, LocalDate.now(), 10, "abc"));
         }
-
-        for (Categoria c : this.categorias) {
-            Produto produto = new Produto("Produto", "Produto", Unidade.UNI, c, 123);
-            this.produtos.add(produto);
-            this.stockEntrada.add(new StockEntrada(produto, LocalDate.now(), 10, "abc"));
-        }
     }
 
     public static DataProvider getInstance() {

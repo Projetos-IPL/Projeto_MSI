@@ -1,9 +1,12 @@
 package pt.ipleiria.ti.ecras.stock;
 
 import pt.ipleiria.ti.datamodel.Produto;
+import pt.ipleiria.ti.datamodel.stock.StockEntrada;
 import pt.ipleiria.ti.utils.BaseScreen;
 
 import javax.swing.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class EcraEntradaStock extends BaseScreen {
@@ -40,11 +43,20 @@ public class EcraEntradaStock extends BaseScreen {
         inputProduto.addActionListener(e -> labelUnidade.setText(((Produto) inputProduto.getSelectedItem()).getUnidade().descricao));
 
         // actions
-        cancelarButton.addActionListener(e -> {
-            setVisible(false);
-            dispose();
-        });
+        cancelarButton.addActionListener(e -> super.closeScreen());
 
-        adicionarButton.addActionListener(e -> JOptionPane.showMessageDialog(null, "Por implementar."));
+        adicionarButton.addActionListener(e -> {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate date = LocalDate.parse(inputDataValidade.getText(), formatter);
+
+            super.dataProvider.adicionarStockEntrada(new StockEntrada(
+                    (Produto) this.inputProduto.getSelectedItem(),
+                    date,
+                    Integer.parseInt(inputQuantidade.getText()),
+                    inputLote.getText()
+            ));
+
+            super.closeScreen();
+        });
     }
 }
