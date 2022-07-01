@@ -6,10 +6,10 @@ import java.time.LocalDate;
 
 public abstract class Stock {
 
-    private Produto produto;
-    private LocalDate data;
-    private int quantidade;
-    private String lote;
+    private final Produto produto;
+    private final LocalDate data;
+    private final int quantidade;
+    private final String lote;
 
     public Stock(Produto produto, LocalDate data, int quantidade, String lote) {
         this.produto = produto;
@@ -22,32 +22,16 @@ public abstract class Stock {
         return produto;
     }
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
     public LocalDate getData() {
         return data;
-    }
-
-    public void setData(LocalDate data) {
-        this.data = data;
     }
 
     public int getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
     public String getLote() {
         return lote;
-    }
-
-    public void setLote(String lote) {
-        this.lote = lote;
     }
 
     @Override

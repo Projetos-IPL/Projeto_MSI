@@ -35,11 +35,15 @@ public class DataProvider {
         this.categorias.addAll(Arrays.asList(Categoria.values()));
         this.unidades.addAll(Arrays.asList(Unidade.values()));
 
+        // dummy data
         for (Categoria c : this.categorias) {
             Produto produto = new Produto("Produto", "Produto", Unidade.UNI, c, 123);
             this.produtos.add(produto);
-            this.stockEntrada.add(new StockEntrada(produto, LocalDate.now(), 10, "abc"));
+            this.adicionarStockEntrada(new StockEntrada(produto, LocalDate.now(), 10, "abc"));
         }
+
+        Produto p = new Produto("Produto Novo", "Produto novo", Unidade.KG, this.categorias.get(0), 1000);
+        this.produtos.add(p);
     }
 
     public static DataProvider getInstance() {
@@ -58,25 +62,9 @@ public class DataProvider {
         return this.produtos;
     }
 
-    public int getProdutoIndex(Produto produto) {
-        return this.produtos.indexOf(produto);
-    }
-
     public void editarProduto(Produto produtoAntigo, Produto produtoNovo) {
         this.produtos.remove(produtoAntigo);
         this.produtos.add(produtoNovo);
-    }
-
-    public LinkedList<StockEntrada> getStockEntrada() {
-        return this.stockEntrada;
-    }
-
-    public LinkedList<StockSaida> getStockSaida() {
-        return this.stockSaida;
-    }
-
-    public LinkedList<StockQuebra> getStockQuebra() {
-        return this.stockQuebra;
     }
 
     public void adicionarProduto(Produto produto) {
@@ -101,6 +89,7 @@ public class DataProvider {
 
         if (valido) {
             this.stockSaida.add(stockSaida);
+            stockSaida.getProduto().setQuantidadeStock(stockSaida.getProduto().getQuantidadeStock() - stockSaida.getQuantidade());
         }
     }
 
@@ -111,6 +100,7 @@ public class DataProvider {
             Error.showErrorMessage(ErrorMessage.QUANTIDADE_STOCK_QUEBRA_INVALIDA);
         } else {
             this.stockQuebra.add(stockQuebra);
+            stockQuebra.getProduto().setQuantidadeStock(stockQuebra.getProduto().getQuantidadeStock() - stockQuebra.getQuantidade());
         }
     }
 

@@ -12,14 +12,6 @@ public class StockEntrada extends Stock {
         super(produto, data, quantidade, lote);
     }
 
-    public LocalDate getDataValidade() {
-        return dataValidade;
-    }
-
-    public void setDataValidade(LocalDate dataValidade) {
-        this.dataValidade = dataValidade;
-    }
-
     @Override
     public String toString() {
         return "(ENTRADA) " + super.toString();

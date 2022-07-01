@@ -5,13 +5,12 @@ import java.text.NumberFormat;
 import java.util.UUID;
 
 public class Produto {
-
     private final String id;
-    private String nome;
-    private String descricao;
-    private Unidade unidade;
-    private Categoria categoria;
-    private double valor;
+    private final String nome;
+    private final String descricao;
+    private final Unidade unidade;
+    private final Categoria categoria;
+    private final double valor;
     private int quantidadeStock;
 
     public Produto(String nome, String descricao, Unidade unidade, Categoria categoria, double valor) {
@@ -23,48 +22,24 @@ public class Produto {
         this.valor = valor;
     }
 
-    public String getId() {
-        return id;
-    }
-
     public String getNome() {
         return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
     public Unidade getUnidade() {
         return unidade;
-    }
-
-    public void setUnidade(Unidade unidade) {
-        this.unidade = unidade;
     }
 
     public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
     public double getValor() {
         return valor;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
     }
 
     public int getQuantidadeStock() {
@@ -80,6 +55,6 @@ public class Produto {
         NumberFormat format = new DecimalFormat("#0.00");
 
         return this.nome + " (" + this.descricao + ") : " + this.unidade + " | " + this.categoria.descricao + " | " +
-                "Preço: " + format.format(this.valor) + " €";
+                "Preço: " + format.format(this.valor) + " € | Stock: " + this.quantidadeStock;
     }
 }

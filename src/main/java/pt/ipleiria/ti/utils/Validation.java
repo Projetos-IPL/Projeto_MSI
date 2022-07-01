@@ -6,6 +6,7 @@ import pt.ipleiria.ti.datamodel.stock.StockEntrada;
 import pt.ipleiria.ti.datamodel.stock.StockSaida;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Validation {
 
@@ -84,7 +85,7 @@ public class Validation {
         LocalDate dataEntradaStock = null;
 
         for (StockEntrada s : dataProvider.getStockEntradaForProduto(stockSaida.getProduto())) {
-            if (s.getProduto() == stockSaida.getProduto() && s.getLote() == stockSaida.getLote()) {
+            if (s.getProduto() == stockSaida.getProduto() && Objects.equals(s.getLote(), stockSaida.getLote())) {
                 found = true;
                 quantidadeStock = s.getQuantidade();
                 dataEntradaStock = s.getData();
@@ -93,7 +94,7 @@ public class Validation {
         }
 
         for (StockEntrada s : dataProvider.getStockEntradaForProduto(stockSaida.getProduto())) {
-            if (s.getLote() == stockSaida.getLote()) {
+            if (Objects.equals(s.getLote(), stockSaida.getLote())) {
                 loteFound = true;
                 break;
             }

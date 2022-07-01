@@ -3,6 +3,8 @@ package pt.ipleiria.ti.utils;
 import pt.ipleiria.ti.ecras.geral.EcraPrincipal;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public abstract class BaseScreen extends JFrame {
 
@@ -16,7 +18,15 @@ public abstract class BaseScreen extends JFrame {
     protected void setupScreen(JPanel rootPanel) {
         setContentPane(rootPanel);
 
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                closeScreen();
+            }
+        });
+
         setResizable(false);
         pack();
 
