@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class EcraEntradaStock extends BaseScreen {
+
     private JPanel rootPanel;
     private JComboBox<Produto> inputProduto;
     private JTextField inputLote;

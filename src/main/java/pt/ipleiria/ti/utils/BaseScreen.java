@@ -10,7 +10,7 @@ public abstract class BaseScreen extends JFrame {
 
     protected final DataProvider dataProvider;
 
-    public BaseScreen(String windowTitle) {
+    protected BaseScreen(String windowTitle) {
         super("Gumbo | " + windowTitle);
         this.dataProvider = DataProvider.getInstance();
     }

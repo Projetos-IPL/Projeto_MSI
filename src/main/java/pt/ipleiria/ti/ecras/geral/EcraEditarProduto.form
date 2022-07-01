@@ -106,7 +106,7 @@
               <background color="-4726015"/>
               <enabled value="true"/>
               <hideActionText value="false"/>
-              <text value="Adicionar Produto"/>
+              <text value="Editar Produto"/>
             </properties>
           </component>
           <component id="163bd" class="javax.swing.JButton" binding="cancelarButton" default-binding="true">

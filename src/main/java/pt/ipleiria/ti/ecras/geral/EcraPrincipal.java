@@ -95,7 +95,7 @@ public class EcraPrincipal extends BaseScreen {
             var selectedProduct = (Produto) listaProdutos.getSelectedValue();
 
             if (selectedProduct == null) {
-                Error.showErrorMessage(ErrorMessage.EDICAO_PRODUTO_NULO);
+                Error.showErrorMessage(this, ErrorMessage.EDICAO_PRODUTO_NULO);
             } else {
                 var ecraEditarProduto = new EcraEditarProduto("Editar Produto - " + selectedProduct.getNome(),
                         selectedProduct);
@@ -108,7 +108,7 @@ public class EcraPrincipal extends BaseScreen {
             var selectedProduct = (Produto) listaProdutos.getSelectedValue();
 
             if (selectedProduct == null) {
-                Error.showErrorMessage(ErrorMessage.EDICAO_PRODUTO_NULO);
+                Error.showErrorMessage(this, ErrorMessage.EDICAO_PRODUTO_NULO);
             } else {
                 var result = JOptionPane.showConfirmDialog(
                         this,
@@ -146,7 +146,7 @@ public class EcraPrincipal extends BaseScreen {
             var selectedProduct = (Produto) listaProdutos.getSelectedValue();
 
             if (selectedProduct == null) {
-                Error.showErrorMessage(ErrorMessage.EDICAO_PRODUTO_NULO);
+                Error.showErrorMessage(this, ErrorMessage.EDICAO_PRODUTO_NULO);
             } else {
                 var ecraEntradaStockLista = new EcraListaStockEntrada("Lista de Movimentos de Entrada de Stock", selectedProduct);
                 ecraEntradaStockLista.setVisible(true);
@@ -158,7 +158,7 @@ public class EcraPrincipal extends BaseScreen {
             var selectedProduct = (Produto) listaProdutos.getSelectedValue();
 
             if (selectedProduct == null) {
-                Error.showErrorMessage(ErrorMessage.EDICAO_PRODUTO_NULO);
+                Error.showErrorMessage(this, ErrorMessage.EDICAO_PRODUTO_NULO);
             } else {
                 var ecraQuebraStockLista = new EcraListaStockQuebra("Lista de Movimentos de Quebra de Stock",
                         selectedProduct);
@@ -171,7 +171,7 @@ public class EcraPrincipal extends BaseScreen {
             var selectedProduct = (Produto) listaProdutos.getSelectedValue();
 
             if (selectedProduct == null) {
-                Error.showErrorMessage(ErrorMessage.EDICAO_PRODUTO_NULO);
+                Error.showErrorMessage(this, ErrorMessage.EDICAO_PRODUTO_NULO);
             } else {
                 var ecraSaidaStockLista = new EcraListaStockSaida("Lista de Movimentos de Saída de Stock",
                         selectedProduct);
@@ -201,7 +201,7 @@ public class EcraPrincipal extends BaseScreen {
         });
 
         btnPesquisaLimpar.addActionListener(e -> {
-            inputPesquisa.setText("");
+            inputPesquisa.setText(null);
             atualizarListaProdutos();
         });
 

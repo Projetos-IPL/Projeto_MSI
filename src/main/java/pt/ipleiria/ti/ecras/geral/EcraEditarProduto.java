@@ -53,7 +53,7 @@ public class EcraEditarProduto extends BaseScreen {
 
                 super.closeScreen();
             } else {
-                Error.showErrorMessage(ErrorMessage.PRODUTO_FORMULARIO_INVALIDO);
+                Error.showErrorMessage(this, ErrorMessage.PRODUTO_FORMULARIO_INVALIDO);
             }
         });
 
@@ -64,7 +64,5 @@ public class EcraEditarProduto extends BaseScreen {
         this.inputCategoria.setSelectedItem(produtoSelecionado.getCategoria());
         this.inputUnidade.setSelectedItem(produtoSelecionado.getUnidade());
         this.inputPreco.setText(String.valueOf(produtoSelecionado.getValor()));
-
-        this.editarProdutoButton.setText("Editar Produto");
     }
 }

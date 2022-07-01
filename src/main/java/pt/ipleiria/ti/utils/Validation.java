@@ -29,32 +29,32 @@ public class Validation {
 
         if (valorProduto.isBlank()) {
             valido = false;
-            Error.showErrorMessage(ErrorMessage.VALOR_PRODUTO_FALTA);
+            Error.showErrorMessage(null, ErrorMessage.VALOR_PRODUTO_FALTA);
         }
 
         try {
             valor = Float.parseFloat(valorProduto);
         } catch (NumberFormatException e) {
             valido = false;
-            Error.showErrorMessage(ErrorMessage.NUMERO_INVALIDO);
+            Error.showErrorMessage(null, ErrorMessage.NUMERO_INVALIDO);
         }
 
         if (valor != -1) {
             if (valor < 0) {
                 valido = false;
-                Error.showErrorMessage(ErrorMessage.PRODUTO_VALOR_NEGATIVO);
+                Error.showErrorMessage(null, ErrorMessage.PRODUTO_VALOR_NEGATIVO);
             }
         }
 
         if (valido && nomeProduto.trim().isBlank()) {
             valido = false;
-            Error.showErrorMessage(ErrorMessage.PRODUTO_NOME_VAZIO);
+            Error.showErrorMessage(null, ErrorMessage.PRODUTO_NOME_VAZIO);
         } else if (valido && nomeProduto.trim().length() < 3) {
             valido = false;
-            Error.showErrorMessage(ErrorMessage.PRODUTO_NOME_CARACTERES);
+            Error.showErrorMessage(null, ErrorMessage.PRODUTO_NOME_CARACTERES);
         } else if (valido && valor < 0) {
             valido = false;
-            Error.showErrorMessage(ErrorMessage.PRODUTO_VALOR_NEGATIVO);
+            Error.showErrorMessage(null, ErrorMessage.PRODUTO_VALOR_NEGATIVO);
         }
 
         return valido;
@@ -65,13 +65,13 @@ public class Validation {
 
         if (Data.getDatesDiff(dataValidade).toDays() < 0) {
             valido = false;
-            Error.showErrorMessage(ErrorMessage.DATA_INFERIR_30_DIAS);
+            Error.showErrorMessage(null, ErrorMessage.DATA_INFERIR_30_DIAS);
         } else if (valido && dataValidade.toEpochDay() < LocalDate.now().toEpochDay()) {
             valido = false;
-            Error.showErrorMessage(ErrorMessage.DATA_VALIDADE_INFERIOR_HOJE);
+            Error.showErrorMessage(null, ErrorMessage.DATA_VALIDADE_INFERIOR_HOJE);
         } else if (valido && quantidade <= 0) {
             valido = false;
-            Error.showErrorMessage(ErrorMessage.QUANTIDADE_STOCK_ENTRADA_INVALIDA);
+            Error.showErrorMessage(null, ErrorMessage.QUANTIDADE_STOCK_ENTRADA_INVALIDA);
         }
 
         return valido;
@@ -103,16 +103,16 @@ public class Validation {
         if (found) {
             if (stockSaida.getQuantidade() != quantidadeStock) {
                 valido = false;
-                Error.showErrorMessage(ErrorMessage.QUANTIDADE_STOCK_SAIDA_INVALIDA);
+                Error.showErrorMessage(null, ErrorMessage.QUANTIDADE_STOCK_SAIDA_INVALIDA);
             } else if (valido && stockSaida.getData().toEpochDay() < LocalDate.now().toEpochDay()) {
                 valido = false;
-                Error.showErrorMessage(ErrorMessage.DATA_STOCK_SAIDA_INFERIOR_ATUAL);
+                Error.showErrorMessage(null, ErrorMessage.DATA_STOCK_SAIDA_INFERIOR_ATUAL);
             } else if (valido && stockSaida.getData().toEpochDay() < dataEntradaStock.toEpochDay()) {
                 valido = false;
-                Error.showErrorMessage(ErrorMessage.DATA_STOCK_SAIDA_INFERIOR_STOCK_ENTRADA);
+                Error.showErrorMessage(null, ErrorMessage.DATA_STOCK_SAIDA_INFERIOR_STOCK_ENTRADA);
             } else if (valido && loteFound) {
                 valido = false;
-                Error.showErrorMessage(ErrorMessage.STOCK_SAIDA_LOTE_INVALIDO);
+                Error.showErrorMessage(null, ErrorMessage.STOCK_SAIDA_LOTE_INVALIDO);
             }
         }
 

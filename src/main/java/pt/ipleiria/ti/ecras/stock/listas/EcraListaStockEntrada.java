@@ -8,6 +8,7 @@ import pt.ipleiria.ti.utils.BaseScreen;
 import javax.swing.*;
 
 public class EcraListaStockEntrada extends BaseScreen {
+
     private final DefaultListModel<StockEntrada> listaStockModel = new DefaultListModel<>();
     private final Produto selectedProduct;
     private JPanel rootPanel;

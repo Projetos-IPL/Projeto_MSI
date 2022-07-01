@@ -5,6 +5,7 @@ import java.text.NumberFormat;
 import java.util.UUID;
 
 public class Produto {
+    
     private final String id;
     private final String nome;
     private final String descricao;

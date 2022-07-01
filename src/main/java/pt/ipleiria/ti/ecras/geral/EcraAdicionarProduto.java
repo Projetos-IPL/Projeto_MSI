@@ -55,7 +55,7 @@ public class EcraAdicionarProduto extends BaseScreen {
 
                 super.closeScreen();
             } else {
-                Error.showErrorMessage(ErrorMessage.PRODUTO_FORMULARIO_INVALIDO);
+                Error.showErrorMessage(this, ErrorMessage.PRODUTO_FORMULARIO_INVALIDO);
             }
         });
 

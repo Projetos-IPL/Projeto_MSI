@@ -42,7 +42,12 @@ public class DataProvider {
             this.adicionarStockEntrada(new StockEntrada(produto, LocalDate.now(), 10, "abc"));
         }
 
-        Produto p = new Produto("Produto Novo", "Produto novo", Unidade.KG, this.categorias.get(0), 1000);
+        Produto p = new Produto(
+                "Produto Novo",
+                "Produto novo",
+                Unidade.KG,
+                this.categorias.get(0),
+                1000);
         this.produtos.add(p);
     }
 
@@ -89,7 +94,8 @@ public class DataProvider {
 
         if (valido) {
             this.stockSaida.add(stockSaida);
-            stockSaida.getProduto().setQuantidadeStock(stockSaida.getProduto().getQuantidadeStock() - stockSaida.getQuantidade());
+            stockSaida.getProduto().setQuantidadeStock(stockSaida.getProduto().getQuantidadeStock() -
+                    stockSaida.getQuantidade());
         }
     }
 
@@ -97,10 +103,11 @@ public class DataProvider {
         int quantidadeStockAtual = stockQuebra.getProduto().getQuantidadeStock();
 
         if (stockQuebra.getQuantidade() > quantidadeStockAtual) {
-            Error.showErrorMessage(ErrorMessage.QUANTIDADE_STOCK_QUEBRA_INVALIDA);
+            Error.showErrorMessage(null, ErrorMessage.QUANTIDADE_STOCK_QUEBRA_INVALIDA);
         } else {
             this.stockQuebra.add(stockQuebra);
-            stockQuebra.getProduto().setQuantidadeStock(stockQuebra.getProduto().getQuantidadeStock() - stockQuebra.getQuantidade());
+            stockQuebra.getProduto().setQuantidadeStock(stockQuebra.getProduto().getQuantidadeStock() -
+                    stockQuebra.getQuantidade());
         }
     }
 

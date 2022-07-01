@@ -1,6 +1,7 @@
 package pt.ipleiria.ti.datamodel;
 
 public enum Unidade {
+
     UNI("Unitário"),
     KG("Quilograma");
 
